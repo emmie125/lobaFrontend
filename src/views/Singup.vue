@@ -1,11 +1,11 @@
 <template>
-  <div class="">
+  <div class="" fluid>
     <b-row class="p-5">
-      <b-row class="text-center">
-        <b-col class="text-center" lg="6">
+      <b-row class="text-center" lg="12">
+        <b-col class="text-center" lg="6" md="4">
           <h1>LOBA</h1>
         </b-col>
-        <b-col lg="5" class="text-end">
+        <b-col lg="5" class="text-end" md="7" sm="12">
           <span> Vous avez déjà un compte? </span>
           <b-button
             :to="{ name: 'login' }"
@@ -89,7 +89,28 @@
         </b-form>
       </b-col>
     </b-row>
-    <b-row></b-row>
+    <b-modal
+      size="md"
+      ref="my-modal"
+      centered
+      hide-footer
+      hide-header
+      button-size="lg"
+      class="text-center"
+    >
+      <div class="d-block text-center mb-4 mt-4">
+        <h3>Votre compte a été créé avec succès</h3>
+      </div>
+      <div class="text-center mb-4">
+        <b-button
+          class="text-center"
+          variant="outline-danger"
+          block
+          @click="hideModal"
+          >Bienvenu(e)</b-button
+        >
+      </div>
+    </b-modal>
   </div>
 </template>
 
@@ -125,11 +146,16 @@ export default {
       };
       await axios(options)
         .then((data) => {
-          console.log(data);
+          console.log(data.data);
+          this.$refs["my-modal"].show();
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.message);
         });
+    },
+    hideModal() {
+      this.$refs["my-modal"].hide();
+      this.$router.push({ name: "login" });
     },
     onReset(event) {
       event.preventDefault();
@@ -157,6 +183,9 @@ export default {
 h1 {
   color: white;
   font-weight: normal;
+}
+h3 {
+  font-size: 20px;
 }
 h2 {
   font-size: 26px;

@@ -91,7 +91,8 @@ export default {
       };
       await axios(options)
         .then((data) => {
-          console.log(data);
+          sessionStorage.setItem("access_token", data.data.access_token);
+          console.log(data.data);
         })
         .catch((error) => {
           console.log(error);

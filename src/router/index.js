@@ -13,11 +13,17 @@ const routes = [
   {
     path: "/signup",
     name: "signup",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Singup.vue"),
+      import(/* webpackChunkName: "signup" */ "../views/Singup.vue"),
+  },
+  {
+    path: "/home",
+    name: "home",
+    component: () => import(/* webpackChunkName: "home" */ "../views/Home.vue"),
+    beforeEnter: (to, from, next) => {
+      if (!sessionStorage.getItem("access_token")) next({ name: "login" });
+      else next();
+    },
   },
 ];
 
