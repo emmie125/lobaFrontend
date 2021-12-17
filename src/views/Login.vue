@@ -5,65 +5,68 @@
 
       <b-col class="col-md-6 offset-md-3 container-form mt-5">
         <h2 class="text-center ml">Connectez-vous à votre compte</h2>
-
-        <b-form @submit="onSubmit" v-if="show">
-          <b-form-group
-            class="m-4"
-            id="input-group-1"
-            label="Adresse mail:"
-            label-for="input-1"
-          >
-            <b-form-input
-              id="input-1"
-              v-model="form.email"
-              type="email"
-              placeholder="Entre ton email"
-              required
-            ></b-form-input>
-          </b-form-group>
-
-          <b-form-group
-            id="input-group-2"
-            class="m-4"
-            label="Password:"
-            label-for="input-2"
-          >
-            <b-form-input
-              id="input-2"
-              type="password"
-              v-model="form.password"
-              placeholder="Entre ton password"
-              required
-            ></b-form-input>
-          </b-form-group>
-          <b-row class="text-center fluid m-3 pt-2 pb-2">
-            <b-button
-              type="submit"
-              class="pl-3 pr-3 pt-2 pb-2"
-              variant="primary"
-              >connexion</b-button
+        <p style="color: #d81b60" class="m-4">{{ error }}</p>
+        <p>
+          <b-form @submit="onSubmit" v-if="show">
+            <b-form-group
+              class="m-4"
+              id="input-group-1"
+              label="Adresse mail:"
+              label-for="input-1"
             >
-          </b-row>
-          <b-row class="text-center fluid m-3 pt-2 pb-2">
-            <b-button
-              :to="{ name: 'signup' }"
-              class="pl-3 pr-3 pt-2 pb-2 btn-secondary"
-              variant="primary"
-              >Créer un compte</b-button
+              <b-form-input
+                id="input-1"
+                v-model="form.email"
+                type="email"
+                placeholder="Entre ton email"
+                required
+              ></b-form-input>
+            </b-form-group>
+
+            <b-form-group
+              id="input-group-2"
+              class="m-4"
+              label="Password:"
+              label-for="input-2"
             >
+              <b-form-input
+                id="input-2"
+                type="password"
+                v-model="form.password"
+                placeholder="Entre ton password"
+                required
+              ></b-form-input>
+            </b-form-group>
+            <b-row class="text-center fluid m-3 pt-2 pb-2">
+              <b-button
+                type="submit"
+                class="pl-3 pr-3 pt-2 pb-2"
+                variant="primary"
+                >connexion</b-button
+              >
+            </b-row>
+            <b-row class="text-center fluid m-3 pt-2 pb-2">
+              <b-button
+                :to="{ name: 'signup' }"
+                class="pl-3 pr-3 pt-2 pb-2 btn-secondary"
+                variant="primary"
+                >Créer un compte</b-button
+              >
+            </b-row>
+          </b-form>
+          <b-row class="text-end m-3">
+            <b-link> mot de passe oublié</b-link>
           </b-row>
-        </b-form>
-        <b-row class="text-end m-3">
-          <b-link> mot de passe oublié</b-link>
-        </b-row>
-      </b-col>
+        </p></b-col
+      >
     </b-row>
     <b-row></b-row>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import { mapActions } from "vuex";
+
 export default {
   name: "Login",
   data() {
@@ -72,31 +75,15 @@ export default {
         email: "",
         password: "",
       },
+      error: "",
       show: true,
     };
   },
   methods: {
-    async onSubmit(event) {
+    ...mapActions(["loginUser"]),
+    onSubmit(event) {
       event.preventDefault();
-      const data = JSON.stringify(this.form);
-      const urlApi = "http://127.0.0.1:8000/api/auth/login";
-      const options = {
-        url: urlApi,
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Requested-With": "XMLHttpRequest",
-        },
-        data,
-      };
-      await axios(options)
-        .then((data) => {
-          sessionStorage.setItem("access_token", data.data.access_token);
-          console.log(data.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      this.loginUser(this.form);
     },
     onReset(event) {
       event.preventDefault();

@@ -86,6 +86,7 @@
               >créer un compte</b-button
             >
           </b-row>
+          <p>{{ err }}</p>
         </b-form>
       </b-col>
     </b-row>
@@ -115,7 +116,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapActions } from "vuex";
 
 export default {
   name: "Signup",
@@ -131,27 +132,11 @@ export default {
     };
   },
   methods: {
-    async onSubmit(event) {
+    ...mapActions(["signupUser"]),
+    onSubmit(event) {
       event.preventDefault();
-      const data = JSON.stringify(this.form);
-      const urlApi = "http://127.0.0.1:8000/api/auth/signup";
-      const options = {
-        url: urlApi,
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Requested-With": "XMLHttpRequest",
-        },
-        data,
-      };
-      await axios(options)
-        .then((data) => {
-          console.log(data.data);
-          this.$refs["my-modal"].show();
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
+      this.$refs["my-modal"].show();
+      this.signupUser(this.form);
     },
     hideModal() {
       this.$refs["my-modal"].hide();
