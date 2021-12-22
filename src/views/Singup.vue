@@ -86,7 +86,6 @@
               >créer un compte</b-button
             >
           </b-row>
-          <p>{{ err }}</p>
         </b-form>
       </b-col>
     </b-row>
@@ -116,7 +115,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "Signup",
@@ -131,12 +130,17 @@ export default {
       show: true,
     };
   },
+  computed: {
+    ...mapState(["isAuthenticated"]),
+  },
   methods: {
     ...mapActions(["signupUser"]),
     onSubmit(event) {
       event.preventDefault();
-      this.$refs["my-modal"].show();
       this.signupUser(this.form);
+      if (!this.isAuthenticated) {
+        this.$refs["my-modal"].show();
+      }
     },
     hideModal() {
       this.$refs["my-modal"].hide();

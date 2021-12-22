@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "Login",
@@ -79,11 +79,19 @@ export default {
       show: true,
     };
   },
+  computed: {
+    ...mapState(["isAuthorized"]),
+  },
   methods: {
     ...mapActions(["loginUser"]),
     onSubmit(event) {
       event.preventDefault();
       this.loginUser(this.form);
+      if (!this.isAuthorized) {
+        this.$router.push({ name: "home" });
+      } else {
+        this.error = " mot de passe ou adresse e-mail incorrecte";
+      }
     },
     onReset(event) {
       event.preventDefault();
