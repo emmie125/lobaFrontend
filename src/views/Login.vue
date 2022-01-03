@@ -88,7 +88,7 @@ export default {
       event.preventDefault();
       this.loginUser(this.form);
       if (!this.isAuthorized) {
-        this.$router.push({ name: "home" });
+        this.$router.push({ name: "home" }).catch(() => {});
       } else {
         this.error = " mot de passe ou adresse e-mail incorrecte";
       }

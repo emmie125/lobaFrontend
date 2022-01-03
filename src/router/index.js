@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/login",
     name: "login",
     component: Login,
   },
@@ -17,13 +17,9 @@ const routes = [
       import(/* webpackChunkName: "signup" */ "../views/Singup.vue"),
   },
   {
-    path: "/home",
+    path: "/",
     name: "home",
     component: () => import(/* webpackChunkName: "home" */ "../views/Home.vue"),
-    beforeEnter: (to, from, next) => {
-      if (!sessionStorage.getItem("access_token")) next({ name: "login" });
-      else next();
-    },
   },
 ];
 
@@ -31,6 +27,11 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+router.beforeEach((to, from, next) => {
+  if (to.name !== "login" && !sessionStorage.getItem("access_token"))
+    next({ name: "login" });
+  else next();
 });
 
 export default router;
