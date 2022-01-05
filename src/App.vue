@@ -1,43 +1,30 @@
 <template>
   <b-container id="app" class="home app" fluid>
-    <Header v-show="!authorization" :username="user" />
     <router-view />
   </b-container>
 </template>
 
 <script>
 // @ is an alias to /src
-import { mapActions, mapState } from "vuex";
-import Header from "./components/header/Header.vue";
 
 export default {
-  name: "Home",
-  components: {
-    Header,
-  },
+  components: {},
   data() {
-    return {
-      user: "b",
-    };
+    return {};
   },
-  computed: {
-    ...mapState(["authorization"]),
-  },
-  methods: {
-    ...mapActions(["connectedUser"]),
-  },
+  computed: {},
+  methods: {},
   mounted() {
-    if (!this.authorization) this.user = this.connectedUser().name;
+    console.log();
   },
+  created() {},
 };
 </script>
 <style lang="scss" scoped>
+@import "@/scss/main.scss";
+
 .app {
-  margin: 0 auto;
-  background-color: #d81b60;
   overflow-x: hidden;
-}
-.home {
-  background-color: white !important;
+  background-color: $colorPrimary;
 }
 </style>

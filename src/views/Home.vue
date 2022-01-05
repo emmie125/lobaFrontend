@@ -1,20 +1,37 @@
 <template>
-  <b-container class="home" fluid> </b-container>
+  <b-container id="app" class="home app" fluid>
+    <Header v-show="!isAuthorized" :username="user" />
+    <router-view />
+  </b-container>
 </template>
 
 <script>
 // @ is an alias to /src
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
+import Header from "../components/header/Header.vue";
 
 export default {
   name: "Home",
-  components: {},
+  components: {
+    Header,
+  },
+  data() {
+    return {};
+  },
+  computed: {
+    ...mapState(["isAuthorized", "user"]),
+  },
   methods: {
     ...mapActions(["connectedUser"]),
   },
   mounted() {
-    this.connectedUser();
+    console.log(this.isAuthorized);
+    console.log("user", this.user);
+    if (!this.isAuthorized) {
+      this.connectedUser();
+    }
   },
+  created() {},
 };
 </script>
 <style lang="scss" scoped>

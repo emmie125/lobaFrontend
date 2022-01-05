@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   state: {
     error: "",
-    email: "",
+    user: "bonjour",
     isAuthenticated: false,
     isAuthorized: false,
   },
@@ -16,6 +16,10 @@ export default {
     },
     authorization(state) {
       state.isAuthorized = true;
+    },
+    userauthorized(state, payload) {
+      state.user = payload.data.name;
+      console.log("test", state.user);
     },
   },
   actions: {
@@ -34,7 +38,7 @@ export default {
         .then((data) => {
           sessionStorage.setItem("access_token", data.data.access_token);
           context.commit("authorization");
-          console.log(data.data);
+          console.log(data.data.name);
         })
         .catch(() => {});
     },
@@ -59,7 +63,7 @@ export default {
           context.commit("error_singup", error);
         });
     },
-    async connectedUser() {
+    async connectedUser(context) {
       const url = "http://127.0.0.1:8000/api/user";
       const options = {
         headers: {
@@ -69,12 +73,17 @@ export default {
       await axios
         .get(url, options)
         .then((response) => {
-          console.log(response.data);
+          context.commit("userauthorized", response);
+          console.log("userauthorized", response.data.name);
         })
         .catch((error) => {
           console.log(error.response);
         });
     },
   },
-  getter: {},
+  getters: {
+    getUser: (state) => {
+      return state.user;
+    },
+  },
 };
