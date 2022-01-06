@@ -80,17 +80,19 @@ export default {
     };
   },
   computed: {
-    ...mapState(["isAuthorized"]),
+    ...mapState({
+      isAuthorized: (state) => state.auth.isAuthorized,
+    }),
   },
   methods: {
     ...mapActions(["loginUser"]),
-    onSubmit(event) {
+    async onSubmit(event) {
       event.preventDefault();
-      console.log("user login", this.form);
+      await this.loginUser(this.form);
 
-      this.loginUser(this.form);
+      console.log("login isAuthorized", this.isAuthorized);
       if (this.isAuthorized) {
-        // this.$router.push({ name: "home" }).catch(() => {});
+        this.$router.push({ name: "home" });
       } else {
         this.error = " mot de passe ou adresse e-mail incorrecte";
       }

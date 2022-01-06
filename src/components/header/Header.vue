@@ -27,16 +27,16 @@
             <b-nav-item href="/" class="nav-item"
               ><Icon class="iconHeader" icon="ant-design:home-filled"
             /></b-nav-item>
-            <b-nav-item href="/" class="nav-item"
+            <b-nav-item :to="{ name: 'persontrust' }" class="nav-item"
               ><Icon class="iconHeader" icon="bi:people-fill"
             /></b-nav-item>
-            <b-nav-item href="/" class="nav-item"
+            <b-nav-item :to="{ name: 'settings' }" class="nav-item"
               ><Icon class="iconHeader" icon="ant-design:setting-filled"
             /></b-nav-item>
             <b-nav-item-dropdown right>
               <!-- Using 'button-content' slot -->
               <template #button-content>
-                <em>User</em>
+                <em>{{ username }}</em>
               </template>
               <b-dropdown-item href="#">Profile</b-dropdown-item>
               <b-dropdown-item href="#">Sign Out</b-dropdown-item>

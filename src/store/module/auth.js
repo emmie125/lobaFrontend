@@ -8,7 +8,7 @@ export default {
     isAuthorized: false,
   },
   mutations: {
-    error_singup(state, payload) {
+    ERROR_SIGNUP(state, payload) {
       state.error = payload.response.data.errors;
     },
     authentification(state) {
@@ -62,7 +62,7 @@ export default {
         })
         .catch((error) => {
           console.log(payload.response.data.errors);
-          context.commit("error_singup", error);
+          context.commit("ERROR_SIGNUP", error);
         });
     },
     async connectedUser(context) {

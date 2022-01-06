@@ -20,6 +20,21 @@ const routes = [
     path: "/",
     name: "home",
     component: () => import(/* webpackChunkName: "home" */ "../views/Home.vue"),
+    children: [
+      { path: "/", name: "home" },
+      {
+        path: "/persontrust",
+        name: "persontrust",
+        component: () =>
+          import(/* webpackChunkName: "home" */ "../views/PersonTrust.vue"),
+      },
+      {
+        path: "/settings",
+        name: "settings",
+        component: () =>
+          import(/* webpackChunkName: "home" */ "../views/Settings.vue"),
+      },
+    ],
   },
 ];
 

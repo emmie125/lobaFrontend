@@ -1,6 +1,6 @@
 <template>
   <b-container id="app" class="home app" fluid>
-    <Header v-show="!isAuthorized" :username="user" />
+    <Header :username="user" />
     <router-view />
   </b-container>
 </template>
@@ -19,17 +19,16 @@ export default {
     return {};
   },
   computed: {
-    ...mapState(["isAuthorized", "user"]),
+    ...mapState({
+      user: (state) => state.auth.user,
+    }),
   },
   methods: {
     ...mapActions(["connectedUser"]),
   },
   mounted() {
-    console.log(this.isAuthorized);
+    this.connectedUser();
     console.log("user", this.user);
-    if (!this.isAuthorized) {
-      this.connectedUser();
-    }
   },
   created() {},
 };
