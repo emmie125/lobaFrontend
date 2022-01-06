@@ -86,9 +86,11 @@ export default {
     ...mapActions(["loginUser"]),
     onSubmit(event) {
       event.preventDefault();
+      console.log("user login", this.form);
+
       this.loginUser(this.form);
-      if (!this.isAuthorized) {
-        this.$router.push({ name: "home" }).catch(() => {});
+      if (this.isAuthorized) {
+        // this.$router.push({ name: "home" }).catch(() => {});
       } else {
         this.error = " mot de passe ou adresse e-mail incorrecte";
       }

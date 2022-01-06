@@ -16,6 +16,7 @@ export default {
     },
     authorization(state) {
       state.isAuthorized = true;
+      console.log("isAuthorized", state.isAuthorized);
     },
     userauthorized(state, payload) {
       state.user = payload.data.name;
@@ -24,6 +25,7 @@ export default {
   },
   actions: {
     async loginUser(context, payload) {
+      console.log("store payload", payload);
       const urlApi = "http://127.0.0.1:8000/api/auth/login";
       const options = {
         url: urlApi,
