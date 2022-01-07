@@ -1,5 +1,5 @@
 <template>
-  <b-container id="app" class="home app" fluid>
+  <b-container id="app" class="app" fluid>
     <router-view />
   </b-container>
 </template>
@@ -25,6 +25,6 @@ export default {
 
 .app {
   overflow-x: hidden;
-  background-color: $colorPrimary;
+  margin: 0 0 !important;
 }
 </style>

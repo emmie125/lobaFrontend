@@ -1,6 +1,10 @@
 <template>
-  <div class="container">
-    <b-row class="p-5">
+  <b-container
+    style="background-color: #d81b60"
+    class="justify-content-center"
+    fluid
+  >
+    <b-row class="p-5" lg="12">
       <h1 class="text-center ml">LOBA</h1>
 
       <b-col class="col-md-6 offset-md-3 container-form mt-5">
@@ -60,8 +64,7 @@
         </p></b-col
       >
     </b-row>
-    <b-row></b-row>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -114,6 +117,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "@/scss/main.scss";
 .container-form {
   border: 1px solid #d81b60;
   padding: 30px;

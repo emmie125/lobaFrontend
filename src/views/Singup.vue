@@ -1,5 +1,5 @@
 <template>
-  <div class="" fluid>
+  <b-container style="background-color: #d81b60" fluid>
     <b-row class="p-5">
       <b-row class="text-center" lg="12">
         <b-col class="text-center" lg="6" md="4">
@@ -111,7 +111,7 @@
         >
       </div>
     </b-modal>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -163,6 +163,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "@/scss/main.scss";
 .container-form {
   border: 1px solid #d81b60;
   padding: 30px;

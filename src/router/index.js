@@ -27,6 +27,24 @@ const routes = [
         name: "persontrust",
         component: () =>
           import(/* webpackChunkName: "home" */ "../views/PersonTrust.vue"),
+        children: [
+          {
+            path: "/persontrust/protective",
+            name: "protective",
+            component: () =>
+              import(
+                /* webpackChunkName: "home" */ "../views/protective/Index.vue"
+              ),
+          },
+          {
+            path: "/persontrust/historical",
+            name: "historical",
+            component: () =>
+              import(
+                /* webpackChunkName: "home" */ "../views/historical/Index.vue"
+              ),
+          },
+        ],
       },
       {
         path: "/settings",
