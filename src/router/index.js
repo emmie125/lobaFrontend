@@ -18,7 +18,6 @@ const routes = [
   },
   {
     path: "/",
-    name: "home",
     component: () => import(/* webpackChunkName: "home" */ "../views/Home.vue"),
     children: [
       { path: "/", name: "home" },
@@ -26,14 +25,16 @@ const routes = [
         path: "/persontrust",
         name: "persontrust",
         component: () =>
-          import(/* webpackChunkName: "home" */ "../views/PersonTrust.vue"),
+          import(
+            /* webpackChunkName: "persontrust" */ "../views/PersonTrust.vue"
+          ),
         children: [
           {
-            path: "/persontrust/protective",
+            path: "/persontrust",
             name: "protective",
             component: () =>
               import(
-                /* webpackChunkName: "home" */ "../views/protective/Index.vue"
+                /* webpackChunkName: "persontrust" */ "../views/Protective.vue"
               ),
           },
           {
@@ -41,7 +42,7 @@ const routes = [
             name: "historical",
             component: () =>
               import(
-                /* webpackChunkName: "home" */ "../views/historical/Index.vue"
+                /* webpackChunkName: "historical" */ "../views/Historical.vue"
               ),
           },
         ],

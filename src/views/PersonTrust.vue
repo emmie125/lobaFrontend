@@ -1,50 +1,135 @@
 <template>
   <b-container class="justify-content-center container_person_trust">
     <b-row lg="12" class="justify-content-center text-center h-100">
-      <b-col lg="6" class="justify-content-center text-center">
-        <b-card-header class="text-center" header-tag="nav">
-          <b-nav card-header fill>
-            <b-nav-item
-              :to="{ name: 'protective' }"
-              exact
-              exact-active-class="active"
-              >Protecteurs</b-nav-item
-            >
-            <b-nav-item
-              :to="{ name: 'historical' }"
-              exact
-              exact-active-class="active"
-              >Historique</b-nav-item
-            >
-          </b-nav>
-        </b-card-header>
-        <b-card-body>
-          <router-view></router-view>
-        </b-card-body>
+      <b-col
+        lg="6"
+        class="justify-content-center text-center person_trust_container"
+      >
+        <b-row>
+          <b-card-header class="text-center w-100" header-tag="nav" fluid>
+            <b-nav card-header tabs fill fluid>
+              <b-nav-item
+                :to="{ name: 'protective' }"
+                exact
+                exact-active-class="active-link"
+                >Protecteurs</b-nav-item
+              >
+              <b-nav-item
+                :to="{ name: 'historical' }"
+                exact
+                exact-active-class="active-link"
+                >Historique</b-nav-item
+              >
+            </b-nav>
+          </b-card-header>
+          <b-card-body>
+            <router-view></router-view>
+          </b-card-body>
+        </b-row>
       </b-col>
-      <b-col lg="6" class="">
+      <b-col lg="6" class="person_trust_container">
         <b-row
           class="justify-content-center align-items-center text-center h-100"
         >
-          <div><Icon icon="majesticons:paper-airplane" /></div>
-          <div><b-button>Ajouter un protecteur</b-button></div>
+          <div class="justify-content-center text-center">
+            <div>
+              <Icon
+                class="icon_trust_people"
+                icon="majesticons:paper-airplane"
+              />
+            </div>
+            <h3>Vos protecteurs</h3>
+            <p>
+              Permettre à un proche ou un groupe de proche de vous venir en
+              aide.
+            </p>
+            <b-button
+              class="btn-protecteur"
+              id="show-btn"
+              @click="showModal"
+              squared
+              >Ajouter un protecteur</b-button
+            >
+          </div>
         </b-row>
       </b-col>
     </b-row>
+    <b-modal ref="my-modal" size="lg" hide-footer hide-header centered>
+      <Form class="p-5" />
+      <b-button class="m-5" variant="outline-warning" block @click="toggleModal"
+        >Toggle Me</b-button
+      >
+    </b-modal>
   </b-container>
 </template>
 <script>
 import { Icon } from "@iconify/vue2";
+import Form from "../components/form/Form.vue";
 export default {
   components: {
     Icon,
+    Form,
+  },
+  methods: {
+    showModal() {
+      this.$refs["my-modal"].show();
+    },
+    hideModal() {
+      this.$refs["my-modal"].hide();
+    },
+    toggleModal() {
+      // We pass the ID of the button that we want to return focus to
+      // when the modal has hidden
+      this.$refs["my-modal"].toggle("#toggle-btn");
+    },
   },
 };
 </script>
 <style lang="scss" scoped>
+@import "@/scss/main.scss";
 .container_person_trust {
-  border: 1px solid black;
-  margin-top: 10vh;
-  height: 90vh;
+  margin-top: 13vh;
+  height: 87vh;
+}
+.icon_trust_people {
+  height: 110px;
+  width: 110px;
+  padding: 30px;
+  border: 1px solid $colorPrimary;
+  border-radius: 50%;
+  /* background-color: $colorPrimary; */
+  color: $colorPrimary;
+  margin-bottom: 30px;
+}
+.person_trust_container {
+  border: 1px solid #dbdbdb;
+}
+h3 {
+  font-weight: 300;
+}
+p {
+  margin-bottom: $colorPrimary;
+}
+.btn-protecteur {
+  margin-top: $colorPrimary;
+  border: 1px solid $colorPrimary;
+  background-color: $colorPrimary;
+  color: white;
+  outline-color: $colorPrimary;
+  &:focus {
+    border: 1px solid $colorPrimary !important;
+  }
+}
+a {
+  color: black;
+  border: transparent !important;
+  &:hover {
+    color: $colorPrimary !important;
+  }
+}
+.active-link {
+  color: $colorPrimary !important;
+  background-color: white !important;
+  border: transparent !important;
 }
 </style>

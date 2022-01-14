@@ -4,7 +4,7 @@
     class="justify-content-center"
     fluid
   >
-    <b-row class="p-5" lg="12">
+    <b-row class="p-5" lg="12" style="background-color: #d81b60">
       <h1 class="text-center ml">LOBA</h1>
 
       <b-col class="col-md-6 offset-md-3 container-form mt-5">
