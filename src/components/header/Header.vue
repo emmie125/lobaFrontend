@@ -59,6 +59,11 @@ export default {
     Logo,
     Icon,
   },
+  computed: {
+    usernamAvatar() {
+      return this.username.slice(0);
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

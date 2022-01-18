@@ -1,7 +1,7 @@
 <template>
-  <b-container id="app" class="app" fluid>
+  <div id="app" class="app" fluid>
     <router-view />
-  </b-container>
+  </div>
 </template>
 
 <script>

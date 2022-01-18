@@ -18,9 +18,14 @@ const routes = [
   },
   {
     path: "/",
+    beforeEnter: (to, from, next) => {
+      if (!sessionStorage.getItem("access_token")) next({ name: "login" });
+      else next();
+    },
+    name: "home",
     component: () => import(/* webpackChunkName: "home" */ "../views/Home.vue"),
     children: [
-      { path: "/", name: "home" },
+      { path: "/" },
       {
         path: "/persontrust",
         name: "persontrust",
@@ -61,11 +66,6 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
-});
-router.beforeEach((to, from, next) => {
-  if (to.name !== "login" && !sessionStorage.getItem("access_token"))
-    next({ name: "login" });
-  else next();
 });
 
 export default router;

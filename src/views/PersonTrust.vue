@@ -56,9 +56,6 @@
     </b-row>
     <b-modal ref="my-modal" size="lg" hide-footer hide-header centered>
       <Form class="p-5" />
-      <b-button class="m-5" variant="outline-warning" block @click="toggleModal"
-        >Toggle Me</b-button
-      >
     </b-modal>
   </b-container>
 </template>

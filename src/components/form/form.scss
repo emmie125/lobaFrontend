@@ -1,0 +1,18 @@
+.avatar-person {
+  background-color: #dbdbdb;
+  margin-bottom: 15px;
+}
+.container-form {
+  text-align: center;
+}
+.btn-form {
+  margin-top: $colorPrimary;
+  border: 1px solid $colorPrimary;
+  background-color: $colorPrimary;
+  color: white;
+  outline-color: $colorPrimary;
+  margin-top: 17px;
+  &:focus {
+    border: 1px solid $colorPrimary !important;
+  }
+}
