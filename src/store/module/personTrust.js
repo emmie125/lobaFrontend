@@ -10,6 +10,7 @@ export default {
     },
     SET_PERSON_TRUST(state, payload) {
       state.personTrust = payload.data;
+      console.log(state.personTrust);
     },
   },
   actions: {
@@ -33,10 +34,14 @@ export default {
       const options = {
         url: urlApi,
         method: "GET",
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        },
       };
       await axios(options)
         .then((response) => {
           context.commit("SET_PERSON_TRUST", response.data);
+          console.log(response.data.data);
         })
         .catch((error) => {
           console.log(error);

@@ -71,10 +71,11 @@ export default {
   computed: {
     ...mapState({
       user_id: (state) => state.auth.user_id,
+      personTrust: (state) => state.personTrust.personTrust,
     }),
   },
   methods: {
-    ...mapActions(["connectedUser"]),
+    ...mapActions(["connectedUser", "getPersonTrust"]),
     showModal() {
       this.$refs["my-modal"].show();
     },
@@ -89,7 +90,14 @@ export default {
   },
   async mounted() {
     await this.connectedUser();
+    await this.getPersonTrust();
     console.log("user", this.user_id);
+    console.log("getPersonTrust", this.personTrust);
+  },
+  watch: {
+    personTrust() {
+      this.getPersonTrust();
+    },
   },
 };
 </script>
