@@ -1,14 +1,21 @@
 <template>
-  <div class="justify-content-center">
-    <b-row class="container-form text-center">
-      <b-avatar badge-offset="-0.2em" size="8rem" class="avatar-person">
-        <template #badge>
-          <Icon icon="ic:baseline-photo-camera" />
-        </template>
-      </b-avatar>
-    </b-row>
-    <b-form @submit="onSubmit" class="container-form">
-      <b-form-group id="input-group-1" label="Nom:" label-for="input-1">
+  <div class="ustify-content-center">
+    <div class="container-profil">
+      <label class="container-image" for="image">
+        <b-img :src="imageProfil" :alt="imageProfil" for="image"></b-img>
+        <span>Cliquer sur l'image afin de sélectionner une image</span>
+      </label>
+      <label @click="cloudinaryUploadImage" class="btn-profil" variant="primary"
+        >Modifier la photo de profil</label
+      >
+    </div>
+    <b-form @submit="onSubmit" class="">
+      <b-form-group
+        id="input-group-1"
+        label="Nom:"
+        class="mt-3"
+        label-for="input-1"
+      >
         <b-form-input
           id="input-1"
           v-model="form.name"
@@ -17,80 +24,83 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-2" label="Numéro :" label-for="input-2">
+      <b-form-group
+        id="input-group-2"
+        label="Numéro :"
+        class="mt-3"
+        label-for="input-2"
+      >
         <b-form-input
           id="input-2"
-          v-model="form.number"
+          v-model="form.phoneNumber"
           placeholder="Entre ton numéro"
           type="tel"
           required
         ></b-form-input>
       </b-form-group>
-      <b-form-group>
+      <b-form-group class="mt-3">
         <b-form-file
-          v-model="imageProfil"
-          class="mt-3"
+          v-model="imageInput"
           type="file"
           accept="image/*"
+          id="image"
           plain
+          class="image-input"
         ></b-form-file>
       </b-form-group>
-      <b-button type="submit" class="btn-form" variant="primary"
-        >Enregistrer</b-button
-      >
+      <div class="justify-content-center text-center">
+        <b-button type="submit" class="btn-form" variant="primary"
+          >Enregistrer</b-button
+        >
+      </div>
     </b-form>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import { Icon } from "@iconify/vue2";
+import { mapActions, mapState } from "vuex";
 export default {
   name: "Form",
-  components: {
-    Icon,
-  },
+  props: ["user_id"],
+  components: {},
   data() {
     return {
       form: {
         name: "",
-        number: "",
+        phoneNumber: "",
       },
-      imageProfil: null,
-      imageResults: null,
+      imageProfil: "avatarprofil.jpg",
+      imageInput: null,
     };
   },
   computed: {
-    isUploaded() {
-      const checkImgSrc = RegExp(/^https:\/\//);
-      return checkImgSrc.test(this.recipe.image);
-    },
+    ...mapState({
+      ispersonTrust: (state) => state.personTrust.ispersonTrust,
+    }),
   },
   methods: {
-    onSubmit(event) {
+    ...mapActions(["createdPersonTrust"]),
+    async onSubmit(event) {
       event.preventDefault();
+      this.form.imageProfil = this.imageProfil;
+      this.form.user_id = this.user_id;
       // alert(JSON.stringify(this.form));
-      this.cloudinaryUploadImage();
+      await this.createdPersonTrust(this.form);
+      console.log(this.ispersonTrust);
     },
     async cloudinaryUploadImage() {
-      console.log("Image profil", this.imageProfil.name);
+      console.log("Image profil", this.imageInput);
       const cloudinaryUploadURL = `https://api.cloudinary.com/v1_1/emmieportfoliollaravel/image/upload`;
       const formData = new FormData();
-      formData.append("file", this.imageProfil.name);
+      formData.append("file", this.imageInput);
       formData.append("upload_preset", "mypreset");
-      formData.append("cloud_name", "emmieportfoliollaravel");
-
-      let requestObj = {
-        url: cloudinaryUploadURL,
-        body: formData,
-      };
 
       await axios
-        .post(requestObj)
+        .post(cloudinaryUploadURL, formData)
         .then((response) => {
-          this.imageResults = response.data;
-          console.log(this.imageResults);
-          console.log("public_id", this.results.public_id);
+          this.imageProfil = response.data.secure_url;
+          console.log(this.imageProfil);
         })
         .catch((error) => {
           console.log(JSON.stringify(error));

@@ -4,6 +4,7 @@ export default {
   state: {
     error: "",
     user: "bonjour",
+    user_id: 0,
     isAuthenticated: false,
     isAuthorized: false,
   },
@@ -20,7 +21,8 @@ export default {
     },
     userauthorized(state, payload) {
       state.user = payload.data.name;
-      console.log("test", state.user);
+      state.user_id = payload.data.id;
+      console.log("test", state.user_id);
     },
   },
   actions: {

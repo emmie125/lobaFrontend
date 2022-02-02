@@ -54,12 +54,13 @@
         </b-row>
       </b-col>
     </b-row>
-    <b-modal ref="my-modal" size="lg" hide-footer hide-header centered>
-      <Form class="p-5" />
+    <b-modal ref="my-modal" size="700px" hide-footer hide-header centered>
+      <Form class="p-3" :user_id="user_id" />
     </b-modal>
   </b-container>
 </template>
 <script>
+import { mapActions, mapState } from "vuex";
 import { Icon } from "@iconify/vue2";
 import Form from "../components/form/Form.vue";
 export default {
@@ -67,7 +68,13 @@ export default {
     Icon,
     Form,
   },
+  computed: {
+    ...mapState({
+      user_id: (state) => state.auth.user_id,
+    }),
+  },
   methods: {
+    ...mapActions(["connectedUser"]),
     showModal() {
       this.$refs["my-modal"].show();
     },
@@ -79,6 +86,10 @@ export default {
       // when the modal has hidden
       this.$refs["my-modal"].toggle("#toggle-btn");
     },
+  },
+  async mounted() {
+    await this.connectedUser();
+    console.log("user", this.user_id);
   },
 };
 </script>
