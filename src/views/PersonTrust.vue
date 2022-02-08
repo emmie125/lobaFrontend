@@ -22,12 +22,14 @@
               >
             </b-nav>
           </b-card-header>
-          <b-card-body>
-            <router-view></router-view>
+          <b-card-body class="container_card_body">
+            <b-row>
+              <router-view></router-view>
+            </b-row>
           </b-card-body>
         </b-row>
       </b-col>
-      <b-col lg="6" class="person_trust_container">
+      <b-col lg="6" class="person_trust_container_create">
         <b-row
           class="justify-content-center align-items-center text-center h-100"
         >
@@ -55,7 +57,7 @@
       </b-col>
     </b-row>
     <b-modal ref="my-modal" size="700px" hide-footer hide-header centered>
-      <Form class="p-3" :user_id="user_id" />
+      <Form class="p-3" :user_id="userId" />
     </b-modal>
   </b-container>
 </template>
@@ -70,12 +72,11 @@ export default {
   },
   computed: {
     ...mapState({
-      user_id: (state) => state.auth.user_id,
-      personTrust: (state) => state.personTrust.personTrust,
+      userId: (state) => state.auth.user_id,
     }),
   },
   methods: {
-    ...mapActions(["connectedUser", "getPersonTrust"]),
+    ...mapActions(["connectedUser", ""]),
     showModal() {
       this.$refs["my-modal"].show();
     },
@@ -90,15 +91,9 @@ export default {
   },
   async mounted() {
     await this.connectedUser();
-    await this.getPersonTrust();
-    console.log("user", this.user_id);
-    console.log("getPersonTrust", this.personTrust);
+    console.log("user", this.userId);
   },
-  watch: {
-    personTrust() {
-      this.getPersonTrust();
-    },
-  },
+  watch: {},
 };
 </script>
 <style lang="scss" scoped>
@@ -106,6 +101,15 @@ export default {
 .container_person_trust {
   margin-top: 13vh;
   height: 87vh;
+  border: 1px solid $colorSecondary;
+}
+.person_trust_container_create {
+  height: 87vh;
+  border: 1px solid $colorSecondary;
+}
+.container_card_body {
+  height: 600px;
+  overflow-y: scroll !important;
 }
 .icon_trust_people {
   height: 110px;
@@ -117,9 +121,7 @@ export default {
   color: $colorPrimary;
   margin-bottom: 30px;
 }
-.person_trust_container {
-  border: 1px solid #dbdbdb;
-}
+
 h3 {
   font-weight: 300;
 }

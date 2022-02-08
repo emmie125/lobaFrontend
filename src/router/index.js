@@ -35,7 +35,7 @@ const routes = [
           ),
         children: [
           {
-            path: "/persontrust",
+            path: "/persontrust/protective",
             name: "protective",
             component: () =>
               import(
@@ -56,7 +56,7 @@ const routes = [
         path: "/settings",
         name: "settings",
         component: () =>
-          import(/* webpackChunkName: "home" */ "../views/Settings.vue"),
+          import(/* webpackChunkName: "setting" */ "../views/Settings.vue"),
       },
     ],
   },

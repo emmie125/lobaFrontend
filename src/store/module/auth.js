@@ -27,7 +27,6 @@ export default {
   },
   actions: {
     async loginUser(context, payload) {
-      console.log("store payload", payload);
       const urlApi = "http://127.0.0.1:8000/api/auth/login";
       const options = {
         url: urlApi,
