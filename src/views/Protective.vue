@@ -55,27 +55,36 @@ export default {
       return this.personTrust.slice();
     },
   },
-  watch: {
-    personTrust() {
-      this.getPersonTrust();
-    },
-  },
+  // watch: {
+  //   personTrust() {
+  //     this.getPersonTrust();
+  //   },
+  // },
   methods: {
     ...mapActions(["getPersonTrust"]),
   },
-  async created() {
+  async mounted() {
     await this.getPersonTrust();
+    console.log("this.getPersonTrust()", this.personTrust);
   },
 };
 </script>
 <style lang="scss" scoped>
 @import "@/scss/main.scss";
+h2 {
+  font-weight: 600;
+  font-size: 20px;
+}
+p {
+  font-size: 12px;
+  color: $colorAlternative;
+}
 .container {
 }
 .image {
   padding: 15px 0px;
   width: 100%;
-  border-radius: 15px !important;
+  border-radius: 15px;
 }
 .container_person {
   @include borderRadius;

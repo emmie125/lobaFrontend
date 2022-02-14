@@ -1,6 +1,6 @@
 <template>
   <b-container id="app" class="home app" fluid>
-    <Header :username="user" />
+    <Header :username="user" :src="imageProfil" />
     <router-view />
   </b-container>
 </template>
@@ -21,6 +21,7 @@ export default {
   computed: {
     ...mapState({
       user: (state) => state.auth.user,
+      imageProfil: (state) => state.auth.image_profil,
     }),
   },
   methods: {
@@ -29,6 +30,7 @@ export default {
   mounted() {
     this.connectedUser();
     console.log("user", this.user);
+    console.log("image_profil", this.imageProfil);
   },
   created() {},
 };

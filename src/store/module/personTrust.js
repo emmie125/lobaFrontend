@@ -10,7 +10,7 @@ export default {
     },
     SET_PERSON_TRUST(state, payload) {
       state.personTrust = payload.data;
-      console.log(state.personTrust);
+      console.log("state.personTrust", state.personTrust);
     },
   },
   actions: {
@@ -41,7 +41,7 @@ export default {
       await axios(options)
         .then((response) => {
           context.commit("SET_PERSON_TRUST", response.data);
-          console.log(response.data.data);
+          console.log("response.data.data", response.data.data);
         })
         .catch((error) => {
           console.log(error);

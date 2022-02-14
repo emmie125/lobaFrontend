@@ -33,7 +33,8 @@
         <b-row
           class="justify-content-center align-items-center text-center h-100"
         >
-          <div class="justify-content-center text-center">
+          <Form v-if="isCreatePerson" class="p-3" :user_id="userId" />
+          <div class="justify-content-center text-center" v-else>
             <div>
               <Icon
                 class="icon_trust_people"
@@ -48,7 +49,7 @@
             <b-button
               class="btn-protecteur"
               id="show-btn"
-              @click="showModal"
+              @click="showForm"
               squared
               >Ajouter un protecteur</b-button
             >
@@ -56,29 +57,37 @@
         </b-row>
       </b-col>
     </b-row>
-    <b-modal ref="my-modal" size="700px" hide-footer hide-header centered>
-      <Form class="p-3" :user_id="userId" />
-    </b-modal>
   </b-container>
 </template>
 <script>
 import { mapActions, mapState } from "vuex";
 import { Icon } from "@iconify/vue2";
 import Form from "../components/form/Form.vue";
+
 export default {
   components: {
     Icon,
     Form,
   },
+  data() {
+    return {
+      isCreatePerson: false,
+    };
+  },
   computed: {
     ...mapState({
       userId: (state) => state.auth.user_id,
     }),
+    createPerson() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.isCreatePerson = true;
+      return this.isCreatePerson;
+    },
   },
   methods: {
     ...mapActions(["connectedUser", ""]),
-    showModal() {
-      this.$refs["my-modal"].show();
+    showForm() {
+      this.createPerson();
     },
     hideModal() {
       this.$refs["my-modal"].hide();

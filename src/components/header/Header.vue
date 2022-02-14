@@ -33,14 +33,19 @@
             <b-nav-item :to="{ name: 'settings' }" class="nav-item"
               ><Icon class="iconHeader" icon="ant-design:setting-filled"
             /></b-nav-item>
-            <b-nav-item-dropdown right>
-              <!-- Using 'button-content' slot -->
-              <template #button-content>
+            <b-nav-item class="d-flex justify-content-center profil">
+              <div class="d-flex justify-content-between" style="width: 100%">
                 <em>{{ username }}</em>
-              </template>
-              <b-dropdown-item href="#">Profile</b-dropdown-item>
-              <b-dropdown-item href="#">Sign Out</b-dropdown-item>
-            </b-nav-item-dropdown>
+                <div class="ml-5" style="width: 30%">
+                  <b-img
+                    :src="src"
+                    style="width: 100%"
+                    fluid
+                    alt="Responsive image"
+                  ></b-img>
+                </div>
+              </div>
+            </b-nav-item>
           </b-navbar-nav>
         </b-collapse>
       </b-row>
@@ -54,7 +59,7 @@ import Logo from "../logo/Logo.vue";
 
 export default {
   name: "Header",
-  props: { username: { type: String } },
+  props: { username: { type: String }, src: { type: String } },
   components: {
     Logo,
     Icon,

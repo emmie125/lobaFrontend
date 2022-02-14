@@ -52,6 +52,7 @@
         <b-button type="submit" class="btn-form" variant="primary"
           >Enregistrer</b-button
         >
+        <b-button type="" class="btn-form" variant="primary">Annuler</b-button>
       </div>
     </b-form>
   </div>

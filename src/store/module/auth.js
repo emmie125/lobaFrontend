@@ -7,6 +7,7 @@ export default {
     user_id: 0,
     isAuthenticated: false,
     isAuthorized: false,
+    image_profil: "",
   },
   mutations: {
     ERROR_SIGNUP(state, payload) {
@@ -21,8 +22,10 @@ export default {
     },
     userauthorized(state, payload) {
       state.user = payload.data.name;
+      state.image_profil = payload.data.image_profil;
       state.user_id = payload.data.id;
       console.log("test", state.user_id);
+      console.log("test", state.image_profil);
     },
   },
   actions: {

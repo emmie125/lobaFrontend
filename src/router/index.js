@@ -36,6 +36,7 @@ const routes = [
         children: [
           {
             path: "/persontrust/protective",
+            redirectTo: "persontrust",
             name: "protective",
             component: () =>
               import(
