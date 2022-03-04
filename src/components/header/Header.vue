@@ -33,18 +33,8 @@
             <b-nav-item :to="{ name: 'settings' }" class="nav-item"
               ><Icon class="iconHeader" icon="ant-design:setting-filled"
             /></b-nav-item>
-            <b-nav-item class="d-flex justify-content-center profil">
-              <div class="d-flex justify-content-between" style="width: 100%">
-                <em>{{ username }}</em>
-                <div class="ml-5" style="width: 30%">
-                  <b-img
-                    :src="src"
-                    style="width: 100%"
-                    fluid
-                    alt="Responsive image"
-                  ></b-img>
-                </div>
-              </div>
+            <b-nav-item class="profil-dropdown">
+              <b-avatar variant="secondary" :src="src" size="34px"></b-avatar>
             </b-nav-item>
           </b-navbar-nav>
         </b-collapse>

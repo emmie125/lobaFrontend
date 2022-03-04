@@ -85,7 +85,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["connectedUser", ""]),
+    ...mapActions(["connectedUser", "getPersonTrust"]),
     showForm() {
       this.createPerson();
     },
@@ -100,6 +100,7 @@ export default {
   },
   async mounted() {
     await this.connectedUser();
+     await this.getPersonTrust();
     console.log("user", this.userId);
   },
   watch: {},

@@ -33,11 +33,12 @@ const routes = [
           import(
             /* webpackChunkName: "persontrust" */ "../views/PersonTrust.vue"
           ),
+
         children: [
           {
-            path: "/persontrust/protective",
-            redirectTo: "persontrust",
+            path: "/persontrust/persontrust",
             name: "protective",
+            // redirect: "persontrust",
             component: () =>
               import(
                 /* webpackChunkName: "persontrust" */ "../views/Protective.vue"

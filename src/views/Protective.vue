@@ -1,6 +1,11 @@
 <template>
   <div class="container">
+    <div class="d-flex align-items-center" v-if="personTrust == null">
+      <strong>Loading...</strong>
+      <b-spinner class="ml-auto"></b-spinner>
+    </div>
     <b-row
+      v-else
       lg="12"
       style=""
       class="container_person"
@@ -55,11 +60,11 @@ export default {
       return this.personTrust.slice();
     },
   },
-  // watch: {
-  //   personTrust() {
-  //     this.getPersonTrust();
-  //   },
-  // },
+  watch: {
+    personTrust() {
+      this.getPersonTrust();
+    },
+  },
   methods: {
     ...mapActions(["getPersonTrust"]),
   },
