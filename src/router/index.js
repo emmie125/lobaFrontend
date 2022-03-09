@@ -13,8 +13,7 @@ const routes = [
   {
     path: "/signup",
     name: "signup",
-    component: () =>
-      import(/* webpackChunkName: "signup" */ "../views/Singup.vue"),
+    component: require("../views/Singup.vue").default,
   },
   {
     path: "/",
@@ -23,42 +22,23 @@ const routes = [
       else next();
     },
     name: "home",
-    component: () => import(/* webpackChunkName: "home" */ "../views/Home.vue"),
+    redirect: "/actuality",
+    component: require("../views/Home.vue").default,
     children: [
-      { path: "/" },
+      {
+        path: "/actuality",
+        name: "actuality",
+        component: require("../views/Actuality.vue").default,
+      },
       {
         path: "/persontrust",
         name: "persontrust",
-        component: () =>
-          import(
-            /* webpackChunkName: "persontrust" */ "../views/PersonTrust.vue"
-          ),
-
-        children: [
-          {
-            path: "/persontrust/persontrust",
-            name: "protective",
-            // redirect: "persontrust",
-            component: () =>
-              import(
-                /* webpackChunkName: "persontrust" */ "../views/Protective.vue"
-              ),
-          },
-          {
-            path: "/persontrust/historical",
-            name: "historical",
-            component: () =>
-              import(
-                /* webpackChunkName: "historical" */ "../views/Historical.vue"
-              ),
-          },
-        ],
+        component: require("../views/PersonTrust.vue").default,
       },
       {
         path: "/settings",
         name: "settings",
-        component: () =>
-          import(/* webpackChunkName: "setting" */ "../views/Settings.vue"),
+        component: require("../views/Settings.vue").default,
       },
     ],
   },

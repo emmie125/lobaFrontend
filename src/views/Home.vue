@@ -1,5 +1,5 @@
 <template>
-  <b-container id="app" class="home app" fluid>
+  <b-container class="home" fluid>
     <Header :username="user" :src="imageProfil" />
     <router-view />
   </b-container>

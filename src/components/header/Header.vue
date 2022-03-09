@@ -24,7 +24,7 @@
           is-nav
         >
           <b-navbar-nav class="">
-            <b-nav-item href="/" class="nav-item"
+            <b-nav-item :to="{ name: 'actuality' }" class="nav-item"
               ><Icon class="iconHeader" icon="ant-design:home-filled"
             /></b-nav-item>
             <b-nav-item :to="{ name: 'persontrust' }" class="nav-item"

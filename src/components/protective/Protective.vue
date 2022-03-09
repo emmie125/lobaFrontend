@@ -5,8 +5,8 @@
       <b-spinner class="ml-auto"></b-spinner>
     </div>
     <b-row
-      v-else
       lg="12"
+      v-else
       style=""
       class="container_person"
       v-for="(person, index) in personTrust"
@@ -42,6 +42,7 @@ export default {
   components: {
     Icon,
   },
+  props: ["personTrust"],
   data() {
     return {
       mainProps: {
@@ -53,23 +54,13 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      personTrust: (state) => state.personTrust.personTrust,
-    }),
-    personTrustAll() {
-      return this.personTrust.slice();
-    },
+    ...mapState({}),
   },
-  watch: {
-    personTrust() {
-      this.getPersonTrust();
-    },
-  },
+  watch: {},
   methods: {
-    ...mapActions(["getPersonTrust"]),
+    ...mapActions([""]),
   },
-  async mounted() {
-    await this.getPersonTrust();
+  mounted() {
     console.log("this.getPersonTrust()", this.personTrust);
   },
 };

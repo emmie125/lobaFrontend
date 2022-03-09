@@ -10,7 +10,7 @@ export default {
     },
     SET_PERSON_TRUST(state, payload) {
       state.personTrust = payload.data;
-      console.log("state.personTrust", state.personTrust);
+      console.log("SET_PERSON_TRUST", state.personTrust);
     },
   },
   actions: {

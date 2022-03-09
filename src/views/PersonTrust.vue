@@ -5,29 +5,12 @@
         lg="6"
         class="justify-content-center text-center person_trust_container"
       >
-        <b-row>
-          <b-card-header class="text-center w-100" header-tag="nav" fluid>
-            <b-nav card-header tabs fill fluid>
-              <b-nav-item
-                :to="{ name: 'protective' }"
-                exact
-                exact-active-class="active-link"
-                >Protecteurs</b-nav-item
-              >
-              <b-nav-item
-                :to="{ name: 'historical' }"
-                exact
-                exact-active-class="active-link"
-                >Historique</b-nav-item
-              >
-            </b-nav>
-          </b-card-header>
-          <b-card-body class="container_card_body">
-            <b-row>
-              <router-view></router-view>
-            </b-row>
-          </b-card-body>
-        </b-row>
+        <b-tabs content-class="mt-3" justified>
+          <b-tab title="Protecteurs" active
+            ><Protective :personTrust="personTrust" class="container_card_body"
+          /></b-tab>
+          <b-tab title="Historique"><p>I'm the second tab</p></b-tab>
+        </b-tabs>
       </b-col>
       <b-col lg="6" class="person_trust_container_create">
         <b-row
@@ -63,11 +46,13 @@
 import { mapActions, mapState } from "vuex";
 import { Icon } from "@iconify/vue2";
 import Form from "../components/form/Form.vue";
+import Protective from "../components/protective/Protective.vue";
 
 export default {
   components: {
     Icon,
     Form,
+    Protective,
   },
   data() {
     return {
@@ -77,6 +62,7 @@ export default {
   computed: {
     ...mapState({
       userId: (state) => state.auth.user_id,
+      personTrust: (state) => state.personTrust.personTrust,
     }),
     createPerson() {
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
@@ -97,13 +83,24 @@ export default {
       // when the modal has hidden
       this.$refs["my-modal"].toggle("#toggle-btn");
     },
+    getPersonTrustAll() {
+      this.getPersonTrust();
+    },
+    getUser() {
+      this.connectedUser();
+    },
   },
-  async mounted() {
-    await this.connectedUser();
-     await this.getPersonTrust();
+   mounted() {
+     this.getPersonTrust();
+     this.connectedUser();
     console.log("user", this.userId);
+    console.log("personTrust", this.personTrust);
   },
-  watch: {},
+  watch: {
+    personTrust() {
+      this.getPersonTrust();
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
