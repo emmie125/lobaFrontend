@@ -3,8 +3,7 @@ import axios from "axios";
 export default {
   state: {
     error: "",
-    user: "bonjour",
-    user_id: 0,
+    user: {},
     isAuthenticated: false,
     isAuthorized: false,
     image_profil: "",
@@ -21,11 +20,8 @@ export default {
       console.log("isAuthorized", state.isAuthorized);
     },
     userauthorized(state, payload) {
-      state.user = payload.data.name;
-      state.image_profil = payload.data.image_profil;
-      state.user_id = payload.data.id;
-      console.log("test", state.user_id);
-      console.log("test", state.image_profil);
+      state.user = payload.data;
+      console.log("test", state.user);
     },
   },
   actions: {
@@ -73,6 +69,8 @@ export default {
       const url = "http://127.0.0.1:8000/api/user";
       const options = {
         headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
           Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         },
       };
@@ -80,7 +78,7 @@ export default {
         .get(url, options)
         .then((response) => {
           context.commit("userauthorized", response);
-          console.log("userauthorized", response.data.name);
+          console.log("userauthorized", response.data);
         })
         .catch((error) => {
           console.log(error.response);

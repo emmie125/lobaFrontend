@@ -28,7 +28,15 @@
           <p>{{ person.phoneNumber }}</p>
         </div>
         <div class="btn_person">
-          <i><Icon icon="carbon:overflow-menu-horizontal" /></i>
+          <b-button-group>
+            <b-dropdown right text="Menu">
+              <b-dropdown-item>Item 1</b-dropdown-item>
+              <b-dropdown-item>Item 2</b-dropdown-item>
+              <b-dropdown-divider></b-dropdown-divider>
+              <b-dropdown-item>Item 3</b-dropdown-item>
+            </b-dropdown>
+            <i><Icon icon="carbon:overflow-menu-horizontal" /></i>
+          </b-button-group>
         </div>
       </b-col>
     </b-row>
@@ -42,7 +50,7 @@ export default {
   components: {
     Icon,
   },
-  props: ["personTrust"],
+  props: ["personTrust", "isloadingPerson"],
   data() {
     return {
       mainProps: {
@@ -59,9 +67,6 @@ export default {
   watch: {},
   methods: {
     ...mapActions([""]),
-  },
-  mounted() {
-    console.log("this.getPersonTrust()", this.personTrust);
   },
 };
 </script>

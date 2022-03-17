@@ -1,8 +1,9 @@
 import axios from "axios";
 export default {
-  data: {
+  state: {
     ispersonTrust: {},
     personTrust: [],
+    isloadingPerson: false,
   },
   mutations: {
     CREATED_PERSON_TRUST(state, payload) {
@@ -11,6 +12,10 @@ export default {
     SET_PERSON_TRUST(state, payload) {
       state.personTrust = payload.data;
       console.log("SET_PERSON_TRUST", state.personTrust);
+    },
+    SET_LOADING_PERSON_TRUST(state) {
+      state.isloadingPerson = true;
+      console.log("SET_LOADING_PERSON_TRUST", state.isloadingPerson);
     },
   },
   actions: {
@@ -29,23 +34,29 @@ export default {
           console.log(error);
         });
     },
-    async getPersonTrust(context) {
-      const urlApi = "http://127.0.0.1:8000/api/person_trusts/";
+    getPersonTrust({ commit }, payload) {
+      const urlApi = `http://127.0.0.1:8000/api/person_trusts/${payload}`;
       const options = {
         url: urlApi,
         method: "GET",
         headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
         },
       };
-      await axios(options)
-        .then((response) => {
-          context.commit("SET_PERSON_TRUST", response.data);
-          console.log("response.data.data", response.data.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      return new Promise((resolve, reject) => {
+        axios(options)
+          .then(({ data }) => {
+            commit("SET_PERSON_TRUST", data);
+            resolve(data);
+            commit("SET_LOADING_PERSON_TRUST");
+            console.log("response.data.data", data.data);
+          })
+          .catch((response) => {
+            console.log(response);
+            reject(response);
+          });
+      });
     },
   },
 };

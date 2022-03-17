@@ -7,7 +7,7 @@
       >
         <b-tabs content-class="mt-3" justified>
           <b-tab title="Protecteurs" active
-            ><Protective :personTrust="personTrust" class="container_card_body"
+            ><Protective class="container_card_body" :personTrust="personTrust"
           /></b-tab>
           <b-tab title="Historique"><p>I'm the second tab</p></b-tab>
         </b-tabs>
@@ -61,8 +61,9 @@ export default {
   },
   computed: {
     ...mapState({
-      userId: (state) => state.auth.user_id,
+      userId: (state) => state.auth.user.id,
       personTrust: (state) => state.personTrust.personTrust,
+      isloadingPerson: (state) => state.personTrust.isloadingPerson,
     }),
     createPerson() {
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
@@ -83,23 +84,20 @@ export default {
       // when the modal has hidden
       this.$refs["my-modal"].toggle("#toggle-btn");
     },
-    getPersonTrustAll() {
-      this.getPersonTrust();
-    },
-    getUser() {
-      this.connectedUser();
+    async getPersonTrusts() {
+      await this.connectedUser();
+      await this.getPersonTrust(this.userId);
     },
   },
-   mounted() {
-     this.getPersonTrust();
-     this.connectedUser();
-    console.log("user", this.userId);
-    console.log("personTrust", this.personTrust);
+  async mounted() {
+    await this.getPersonTrusts();
+    console.log("user id", this.userId);
+    console.log("getPersonTrust()", this.personTrust);
   },
   watch: {
-    personTrust() {
-      this.getPersonTrust();
-    },
+    // personTrust() {
+    //   this.getPersonTrusts();
+    // },
   },
 };
 </script>

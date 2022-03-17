@@ -20,15 +20,15 @@ export default {
   },
   computed: {
     ...mapState({
-      user: (state) => state.auth.user,
-      imageProfil: (state) => state.auth.image_profil,
+      user: (state) => state.auth.user.name,
+      imageProfil: (state) => state.auth.user.image_profil,
     }),
   },
   methods: {
     ...mapActions(["connectedUser"]),
   },
-  mounted() {
-    this.connectedUser();
+  async mounted() {
+    await this.connectedUser();
     console.log("user", this.user);
     console.log("image_profil", this.imageProfil);
   },

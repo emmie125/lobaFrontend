@@ -1,6 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Login from "../views/Login.vue";
+import Singup from "../views/Singup.vue";
+import Home from "../views/Home.vue";
+import Actuality from "../views/Actuality.vue";
+import PersonTrust from "../views/PersonTrust.vue";
+import Settings from "../views/Settings.vue";
 
 Vue.use(VueRouter);
 
@@ -13,7 +18,7 @@ const routes = [
   {
     path: "/signup",
     name: "signup",
-    component: require("../views/Singup.vue").default,
+    component: Singup,
   },
   {
     path: "/",
@@ -23,22 +28,22 @@ const routes = [
     },
     name: "home",
     redirect: "/actuality",
-    component: require("../views/Home.vue").default,
+    component: Home,
     children: [
       {
         path: "/actuality",
         name: "actuality",
-        component: require("../views/Actuality.vue").default,
+        component: Actuality,
       },
       {
         path: "/persontrust",
         name: "persontrust",
-        component: require("../views/PersonTrust.vue").default,
+        component: PersonTrust,
       },
       {
         path: "/settings",
         name: "settings",
-        component: require("../views/Settings.vue").default,
+        component: Settings,
       },
     ],
   },
