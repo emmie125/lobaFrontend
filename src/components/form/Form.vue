@@ -144,7 +144,6 @@ export default {
   },
   watch: {
     personUpdate() {
-      console.log(" enfant", this.personUpdate);
       this.personUpdateForm();
     },
   },
