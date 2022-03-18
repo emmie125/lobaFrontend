@@ -1,10 +1,10 @@
 <template>
   <div class="ustify-content-center">
     <div class="container-profil">
-      <div class="container-image" for="image">
+      <label class="container-image" for="image">
         <b-img :src="imageProfil" :alt="imageProfil" for="image"></b-img>
         <span>Cliquer sur l'image afin de sélectionner une image</span>
-      </div>
+      </label>
       <label @click="cloudinaryUploadImage" class="btn-profil" variant="primary"
         >Modifier la photo de profil</label
       >
@@ -48,11 +48,11 @@
           class="image-input"
         ></b-form-file>
       </b-form-group>
-      <div class="justify-content-center text-center">
-        <b-button type="submit" class="btn-form" variant="primary">{{
+      <div class="d-flex justify-content-around">
+        <b-button type="submit" class="btn-form" variant="outline-light">{{
           labelButtonSubmit
         }}</b-button>
-        <b-button type="reset" class="btn-form" variant="primary">
+        <b-button type="reset" class="btn-form-reset" variant="outline-light">
           Annuler</b-button>
       </div>
     </b-form>

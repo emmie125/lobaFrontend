@@ -31,7 +31,7 @@
           <b-dropdown
             right
             toggle-class="text-decoration-none outline-none border-white"
-            variant="#d81b60"
+            variant="outline-light"
             class="btn-dropdown-container"
             no-caret
           >
