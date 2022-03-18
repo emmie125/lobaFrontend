@@ -22,8 +22,9 @@
           <Form
             v-if="isShowForm"
             class="p-3"
-            :user_id="userId"
             :personUpdate="personUpdate"
+            :isUpdating="isUpdating"
+            @onCancel="cancelUser"
           />
           <div class="justify-content-center text-center" v-else>
             <div>
@@ -37,7 +38,12 @@
               Permettre à un proche ou un groupe de proche de vous venir en
               aide.
             </p>
-            <b-button class="btn-protecteur" id="show-btn" @click="Form" squared
+            <b-button
+              class="btn-primary"
+              active-class="btn-primary"
+              variant="outline-light"
+              id="show-btn"
+              @click="Form"
               >Ajouter un protecteur</b-button
             >
           </div>
@@ -62,6 +68,7 @@ export default {
     return {
       isShowForm: false,
       personUpdate: {},
+      isUpdating: false,
     };
   },
   computed: {
@@ -89,8 +96,14 @@ export default {
     },
     onUpdatePerson(person) {
       this.isShowForm = true;
+      this.isUpdating = true;
       this.personUpdate = person;
-      console.log("personTrust", person);
+      console.log("parent", person);
+    },
+    cancelUser() {
+      this.personUpdate = {};
+      this.isShowForm = false;
+      this.isUpdating = false;
     },
   },
   mounted() {
@@ -136,16 +149,6 @@ h3 {
 }
 p {
   margin-bottom: $colorPrimary;
-}
-.btn-protecteur {
-  margin-top: $colorPrimary;
-  border: 1px solid $colorPrimary;
-  background-color: $colorPrimary;
-  color: white;
-  outline-color: $colorPrimary;
-  &:focus {
-    border: 1px solid $colorPrimary !important;
-  }
 }
 a {
   color: black;

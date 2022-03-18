@@ -9,11 +9,11 @@
         >Modifier la photo de profil</label
       >
     </div>
-    <b-form @submit="onSubmit" class="">
+    <b-form @submit="onSubmit" @reset="onReset" class="">
       <b-form-group
         id="input-group-1"
         label="Nom:"
-        class="mt-3"
+        class="mt-3 text-start"
         label-for="input-1"
       >
         <b-form-input
@@ -27,7 +27,7 @@
       <b-form-group
         id="input-group-2"
         label="Numéro :"
-        class="mt-3"
+        class="mt-3 text-start"
         label-for="input-2"
       >
         <b-form-input
@@ -49,11 +49,12 @@
         ></b-form-file>
       </b-form-group>
       <div class="d-flex justify-content-around">
-        <b-button type="submit" class="btn-form" variant="outline-light">{{
+        <b-button type="submit" class="btn-primary" variant="outline-light">{{
           labelButtonSubmit
         }}</b-button>
-        <b-button type="reset" class="btn-form-reset" variant="outline-light">
-          Annuler</b-button>
+        <b-button type="reset" class="btn-secondary" variant="outline-light">
+          Annuler</b-button
+        >
       </div>
     </b-form>
   </div>
@@ -64,10 +65,23 @@ import axios from "axios";
 import { mapActions, mapState } from "vuex";
 export default {
   name: "Form",
-  props: ["personUpdate"],
+  props: {
+    isUpdating: {
+      type: Boolean,
+      required: false,
+    },
+    personUpdate: {
+      type: Object,
+      required: false,
+      default: () => {
+        return {};
+      },
+    },
+  },
   components: {},
   data() {
     return {
+      personUpdated: this.personUpdate,
       form: {
         name: "",
         phoneNumber: "",
@@ -75,7 +89,6 @@ export default {
       imageProfil: "avatarprofil.jpg",
       imageInput: null,
       labelButtonSubmit: "Enregistrer",
-      labelButtonReset: "Annuler",
     };
   },
   computed: {
@@ -114,16 +127,24 @@ export default {
       this.form.phoneNumber = this.personUpdate.phoneNumber;
       this.imageProfil = this.personUpdate.imageProfil;
       this.labelButtonSubmit = "Modifier";
-      this.labelButtonReset = "Reinitialiser";
+    },
+    onReset() {
+      this.personUpdate = {};
+      this.form.name = "";
+      this.form.phoneNumber = "";
+      this.labelButtonSubmit = "Enregistrer";
+      this.imageProfil = "avatarprofil.jpg";
+      this.$emit("onCancel");
     },
   },
   mounted() {
-    // if (this.personUpdate) {
-    //   this.personUpdateForm();
-    // }
+    if (this.isUpdating) {
+      this.personUpdateForm();
+    }
   },
   watch: {
     personUpdate() {
+      console.log(" enfant", this.personUpdate);
       this.personUpdateForm();
     },
   },

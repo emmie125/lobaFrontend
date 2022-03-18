@@ -1,0 +1,20 @@
+.btn-primary {
+  background-color: $colorPrimary !important;
+  color: white;
+  border: 1px solid $colorPrimary !important;
+  &:hover {
+    color: white;
+    border: 1px solid $colorPrimary !important;
+  }
+}
+.btn-secondary {
+  background-color: white !important;
+  color: $colorPrimary;
+  outline-style: none;
+  border: 1px solid $colorPrimary !important;
+  &:hover {
+    background-color: white !important;
+    color: $colorPrimary;
+    outline-style: none;
+  }
+}
