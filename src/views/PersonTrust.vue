@@ -88,6 +88,7 @@ export default {
       await this.getPersonTrust();
     },
     onUpdatePerson(person) {
+      this.isShowForm = true;
       this.personUpdate = person;
       console.log("personTrust", person);
     },

@@ -1,10 +1,10 @@
 <template>
   <div class="ustify-content-center">
     <div class="container-profil">
-      <label class="container-image" for="image">
+      <div class="container-image" for="image">
         <b-img :src="imageProfil" :alt="imageProfil" for="image"></b-img>
         <span>Cliquer sur l'image afin de sélectionner une image</span>
-      </label>
+      </div>
       <label @click="cloudinaryUploadImage" class="btn-profil" variant="primary"
         >Modifier la photo de profil</label
       >
@@ -49,10 +49,11 @@
         ></b-form-file>
       </b-form-group>
       <div class="justify-content-center text-center">
-        <b-button type="submit" class="btn-form" variant="primary"
-          >Enregistrer</b-button
-        >
-        <b-button type="" class="btn-form" variant="primary">Annuler</b-button>
+        <b-button type="submit" class="btn-form" variant="primary">{{
+          labelButtonSubmit
+        }}</b-button>
+        <b-button type="reset" class="btn-form" variant="primary">
+          Annuler</b-button>
       </div>
     </b-form>
   </div>
@@ -63,7 +64,7 @@ import axios from "axios";
 import { mapActions, mapState } from "vuex";
 export default {
   name: "Form",
-  props: ["user_id","personUpdate"],
+  props: ["personUpdate"],
   components: {},
   data() {
     return {
@@ -73,6 +74,8 @@ export default {
       },
       imageProfil: "avatarprofil.jpg",
       imageInput: null,
+      labelButtonSubmit: "Enregistrer",
+      labelButtonReset: "Annuler",
     };
   },
   computed: {
@@ -85,7 +88,6 @@ export default {
     async onSubmit(event) {
       event.preventDefault();
       this.form.imageProfil = this.imageProfil;
-      this.form.user_id = this.user_id;
       // alert(JSON.stringify(this.form));
       await this.createdPersonTrust(this.form);
       console.log(this.ispersonTrust);
@@ -106,6 +108,23 @@ export default {
         .catch((error) => {
           console.log(JSON.stringify(error));
         });
+    },
+    personUpdateForm() {
+      this.form.name = this.personUpdate.name;
+      this.form.phoneNumber = this.personUpdate.phoneNumber;
+      this.imageProfil = this.personUpdate.imageProfil;
+      this.labelButtonSubmit = "Modifier";
+      this.labelButtonReset = "Reinitialiser";
+    },
+  },
+  mounted() {
+    // if (this.personUpdate) {
+    //   this.personUpdateForm();
+    // }
+  },
+  watch: {
+    personUpdate() {
+      this.personUpdateForm();
     },
   },
 };
