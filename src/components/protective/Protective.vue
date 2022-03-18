@@ -80,6 +80,7 @@ export default {
     ...mapActions([""]),
     onUpdate(person) {
       console.log(person);
+      this.$emit("updatePerson", person);
     },
   },
 };

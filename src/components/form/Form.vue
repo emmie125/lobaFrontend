@@ -63,7 +63,7 @@ import axios from "axios";
 import { mapActions, mapState } from "vuex";
 export default {
   name: "Form",
-  props: ["user_id"],
+  props: ["user_id","personUpdate"],
   components: {},
   data() {
     return {

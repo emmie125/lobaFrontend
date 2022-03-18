@@ -7,7 +7,10 @@
       >
         <b-tabs content-class="mt-3" justified>
           <b-tab title="Protecteurs" active
-            ><Protective class="container_card_body" :personTrust="personTrust"
+            ><Protective
+              class="container_card_body"
+              :personTrust="personTrust"
+              @updatePerson="onUpdatePerson"
           /></b-tab>
           <b-tab title="Historique"><p>I'm the second tab</p></b-tab>
         </b-tabs>
@@ -16,7 +19,12 @@
         <b-row
           class="justify-content-center align-items-center text-center h-100"
         >
-          <Form v-if="isCreatePerson" class="p-3" :user_id="userId" />
+          <Form
+            v-if="isShowForm"
+            class="p-3"
+            :user_id="userId"
+            :personUpdate="personUpdate"
+          />
           <div class="justify-content-center text-center" v-else>
             <div>
               <Icon
@@ -29,11 +37,7 @@
               Permettre à un proche ou un groupe de proche de vous venir en
               aide.
             </p>
-            <b-button
-              class="btn-protecteur"
-              id="show-btn"
-              @click="showForm"
-              squared
+            <b-button class="btn-protecteur" id="show-btn" @click="Form" squared
               >Ajouter un protecteur</b-button
             >
           </div>
@@ -56,7 +60,8 @@ export default {
   },
   data() {
     return {
-      isCreatePerson: false,
+      isShowForm: false,
+      personUpdate: {},
     };
   },
   computed: {
@@ -65,16 +70,11 @@ export default {
       personTrust: (state) => state.personTrust.personTrust,
       isloadingPerson: (state) => state.personTrust.isloadingPerson,
     }),
-    createPerson() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.isCreatePerson = true;
-      return this.isCreatePerson;
-    },
   },
   methods: {
     ...mapActions(["connectedUser", "getPersonTrust"]),
-    showForm() {
-      this.createPerson();
+    Form() {
+      this.isShowForm = true;
     },
     hideModal() {
       this.$refs["my-modal"].hide();
@@ -86,6 +86,10 @@ export default {
     },
     async getPersonTrusts() {
       await this.getPersonTrust();
+    },
+    onUpdatePerson(person) {
+      this.personUpdate = person;
+      console.log("personTrust", person);
     },
   },
   mounted() {

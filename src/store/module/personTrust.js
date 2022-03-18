@@ -23,6 +23,11 @@ export default {
       const urlApi = "http://127.0.0.1:8000/api/person_trusts/";
       const options = {
         url: urlApi,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        },
         method: "POST",
         data: payload,
       };
