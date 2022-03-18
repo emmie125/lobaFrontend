@@ -34,14 +34,15 @@ export default {
           console.log(error);
         });
     },
-    getPersonTrust({ commit }, payload) {
-      const urlApi = `http://127.0.0.1:8000/api/person_trusts/${payload}`;
+    getPersonTrust({ commit }) {
+      const urlApi = `http://127.0.0.1:8000/api/person_trusts/`;
       const options = {
         url: urlApi,
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         },
       };
       return new Promise((resolve, reject) => {

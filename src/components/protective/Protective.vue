@@ -28,15 +28,26 @@
           <p>{{ person.phoneNumber }}</p>
         </div>
         <div class="btn_person">
-          <b-button-group>
-            <b-dropdown right text="Menu">
-              <b-dropdown-item>Item 1</b-dropdown-item>
-              <b-dropdown-item>Item 2</b-dropdown-item>
-              <b-dropdown-divider></b-dropdown-divider>
-              <b-dropdown-item>Item 3</b-dropdown-item>
-            </b-dropdown>
-            <i><Icon icon="carbon:overflow-menu-horizontal" /></i>
-          </b-button-group>
+          <b-dropdown
+            right
+            toggle-class="text-decoration-none outline-none border-white"
+            variant="#d81b60"
+            class="btn-dropdown-container"
+            no-caret
+          >
+            <template #button-content class="bg-transparent">
+              <i class="btn-dropdown"
+                ><Icon icon="carbon:overflow-menu-horizontal"
+              /></i>
+            </template>
+            <b-dropdown-item @click="onUpdate(person)"
+              >Modifier</b-dropdown-item
+            >
+            <b-dropdown-divider></b-dropdown-divider>
+            <b-dropdown-item>Voir</b-dropdown-item>
+            <b-dropdown-divider></b-dropdown-divider>
+            <b-dropdown-item>Supprimer</b-dropdown-item>
+          </b-dropdown>
         </div>
       </b-col>
     </b-row>
@@ -67,50 +78,13 @@ export default {
   watch: {},
   methods: {
     ...mapActions([""]),
+    onUpdate(person) {
+      console.log(person);
+    },
   },
 };
 </script>
 <style lang="scss" scoped>
 @import "@/scss/main.scss";
-h2 {
-  font-weight: 600;
-  font-size: 20px;
-}
-p {
-  font-size: 12px;
-  color: $colorAlternative;
-}
-.container {
-}
-.image {
-  padding: 15px 0px;
-  width: 100%;
-  border-radius: 15px;
-}
-.container_person {
-  @include borderRadius;
-  border: 1px solid $colorSecondary;
-  margin-bottom: 15px;
-  &:hover {
-    cursor: pointer;
-  }
-}
-.container_person_identity {
-  display: flex;
-  flex-direction: row !important;
-  justify-content: space-between;
-  text-align: center !important;
-  align-self: center;
-  &_information {
-    width: 100%;
-    text-align: start;
-    align-self: center;
-  }
-  .btn_person {
-    width: 100%;
-    text-align: end;
-    justify-content: center;
-    align-self: center;
-  }
-}
+@import "./protective.scss";
 </style>

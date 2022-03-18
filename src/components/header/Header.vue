@@ -33,10 +33,22 @@
             <b-nav-item :to="{ name: 'settings' }" class="nav-item"
               ><Icon class="iconHeader" icon="ant-design:setting-filled"
             /></b-nav-item>
-            <b-nav-item class="profil-dropdown">
-              <b-avatar variant="secondary" :src="src" size="34px"></b-avatar>
-            </b-nav-item>
           </b-navbar-nav>
+          <b-dropdown
+            id="dropdown-offset"
+            offset="25"
+            toggle-class="text-decoration-none outline-none border-none m-ml-2"
+            variant="#d81b60"
+            class="btn-dropdown-container"
+            no-caret
+          >
+            <template #button-content class="bg-transparent">
+              <b-avatar variant="secondary" :src="src" size="34px"></b-avatar>
+            </template>
+            <b-dropdown-item>Profil</b-dropdown-item>
+            <b-dropdown-divider></b-dropdown-divider>
+            <b-dropdown-item>Deconnexion</b-dropdown-item>
+          </b-dropdown>
         </b-collapse>
       </b-row>
     </b-row>

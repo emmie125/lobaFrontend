@@ -85,12 +85,11 @@ export default {
       this.$refs["my-modal"].toggle("#toggle-btn");
     },
     async getPersonTrusts() {
-      await this.connectedUser();
-      await this.getPersonTrust(this.userId);
+      await this.getPersonTrust();
     },
   },
-  async mounted() {
-    await this.getPersonTrusts();
+  mounted() {
+    this.getPersonTrusts();
     console.log("user id", this.userId);
     console.log("getPersonTrust()", this.personTrust);
   },

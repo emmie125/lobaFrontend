@@ -1,3 +1,16 @@
+.btn-dropdown-container {
+  color: $colorPrimary;
+  border-radius: 5px;
+  margin-left: 50px;
+  &:active {
+    outline-style: none !important;
+    border: none !important;
+  }
+  .btn-dropdown {
+    color: $colorPrimary;
+    font-size: 20px;
+  }
+}
 .navbar {
   width: 100%;
   background-color: $colorPrimary;
