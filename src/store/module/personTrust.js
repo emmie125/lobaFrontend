@@ -39,6 +39,26 @@ export default {
           console.log(error);
         });
     },
+    async updatedPersonTrust(context, payload) {
+      const urlApi = "http://127.0.0.1:8000/api/person_trusts/";
+      const options = {
+        url: urlApi,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        },
+        method: "PUT",
+        data: payload,
+      };
+      await axios(options)
+        .then((response) => {
+          context.commit("CREATED_PERSON_TRUST", response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     getPersonTrust({ commit }) {
       const urlApi = `http://127.0.0.1:8000/api/person_trusts/`;
       const options = {

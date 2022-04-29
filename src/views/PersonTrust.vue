@@ -81,7 +81,7 @@ export default {
     }),
   },
   methods: {
-    ...mapActions(["connectedUser", "getPersonTrust"]),
+    ...mapActions(["connectedUser", "getPersonTrust", "updatedPersonTrust"]),
     Form() {
       this.isShowForm = true;
     },
@@ -100,6 +100,7 @@ export default {
       this.isShowForm = true;
       this.isUpdating = true;
       this.personUpdate = person;
+      this.updatedPersonTrust(person);
       console.log("parent", person);
     },
     cancelPerson() {
