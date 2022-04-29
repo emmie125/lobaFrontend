@@ -100,7 +100,7 @@ export default {
       this.isShowForm = true;
       this.isUpdating = true;
       this.personUpdate = person;
-      this.updatedPersonTrust(person);
+
       console.log("parent", person);
     },
     cancelPerson() {

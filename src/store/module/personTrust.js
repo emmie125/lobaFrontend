@@ -40,7 +40,8 @@ export default {
         });
     },
     async updatedPersonTrust(context, payload) {
-      const urlApi = "http://127.0.0.1:8000/api/person_trusts/";
+      console.log("payload ->", payload);
+      const urlApi = `http://127.0.0.1:8000/api/person_trusts/${payload.id}`;
       const options = {
         url: urlApi,
         headers: {

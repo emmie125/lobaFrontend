@@ -101,12 +101,17 @@ export default {
     }),
   },
   methods: {
-    ...mapActions(["createdPersonTrust"]),
+    ...mapActions(["createdPersonTrust", "updatedPersonTrust"]),
     async onSubmit(event) {
       event.preventDefault();
       this.form.imageProfil = this.imageProfil;
       // alert(JSON.stringify(this.form));
-      await this.createdPersonTrust(this.form);
+      if (this.labelButtonSubmit == "Enregistrer") {
+        await this.createdPersonTrust(this.form);
+      } else {
+        this.form.id = this.personUpdate.id;
+        await this.updatedPersonTrust(this.form);
+      }
       console.log(this.ispersonTrust);
     },
     async cloudinaryUploadImage() {
