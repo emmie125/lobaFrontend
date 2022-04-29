@@ -15,6 +15,11 @@
   &:hover {
     background-color: white !important;
     color: $colorPrimary;
-    outline-style: none;
+    outline-style: none !important;
+  }
+  &:focus {
+    background-color: white !important;
+    color: $colorPrimary;
+    outline-style: none !important;
   }
 }

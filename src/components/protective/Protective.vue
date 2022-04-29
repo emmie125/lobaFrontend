@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container p-3">
     <div class="d-flex align-items-center" v-if="personTrust == null">
       <strong>Loading...</strong>
       <b-spinner class="ml-auto"></b-spinner>

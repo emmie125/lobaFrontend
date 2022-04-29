@@ -6,33 +6,8 @@
   justify-content: center;
   text-align: center;
 }
-.btn-form {
-  margin-top: $colorPrimary;
-  border: 1px solid $colorPrimary;
-  background-color: $colorPrimary;
-  color: white;
-  outline-color: $colorPrimary;
-  margin-top: 17px;
-  &-reset {
-    background-color: white;
-    color: $colorPrimary;
-    border: 1px solid $colorPrimary !important;
-    &:hover {
-      background-color: white !important;
-      color: $colorPrimary;
-      outline-style: none;
-    }
-    &:focus {
-      background-color: white !important;
-      color: $colorPrimary;
-      outline-style: none !important;
-    }
-  }
-  &:hover {
-    background-color: $colorPrimary;
-    color: white;
-    border: 1px solid $colorPrimary !important;
-  }
+.btn-reset {
+  margin-left: 15px;
 }
 .container-profil {
   width: 100%;

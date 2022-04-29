@@ -1,7 +1,7 @@
 .btn-dropdown-container {
   color: $colorPrimary;
   border-radius: 5px;
-  margin-left: 50px;
+  // margin-left: 50px;
   &:active {
     outline-style: none !important;
     border: none !important;
@@ -30,8 +30,11 @@
   width: 100%;
   justify-content: flex-end;
   align-self: end;
+  .nav {
+    justify-content: space-between;
+    width: 100%;
+  }
   .nav-item {
-    margin-left: 50px;
   }
 }
 .iconHeader {

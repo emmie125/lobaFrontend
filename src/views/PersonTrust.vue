@@ -5,14 +5,16 @@
         lg="6"
         class="justify-content-center text-center person_trust_container"
       >
-        <b-tabs content-class="mt-3" justified>
-          <b-tab title="Protecteurs" active
+        <b-tabs content-class="mt-3 " justified>
+          <b-tab title="Protecteurs" exact exact-active-class="active-link"
             ><Protective
               class="container_card_body"
               :personTrust="personTrust"
               @updatePerson="onUpdatePerson"
           /></b-tab>
-          <b-tab title="Historique"><p>I'm the second tab</p></b-tab>
+          <b-tab title="Historique" exact exact-active-class="active-link"
+            ><p>I'm the second tab</p></b-tab
+          >
         </b-tabs>
       </b-col>
       <b-col lg="6" class="person_trust_container_create">
@@ -24,7 +26,7 @@
             class="p-3"
             :personUpdate="personUpdate"
             :isUpdating="isUpdating"
-            @onCancel="cancelUser"
+            @onCancel="cancelPerson"
           />
           <div class="justify-content-center text-center" v-else>
             <div>
@@ -100,7 +102,7 @@ export default {
       this.personUpdate = person;
       console.log("parent", person);
     },
-    cancelUser() {
+    cancelPerson() {
       this.personUpdate = {};
       this.isShowForm = false;
       this.isUpdating = false;
@@ -111,11 +113,7 @@ export default {
     console.log("user id", this.userId);
     console.log("getPersonTrust()", this.personTrust);
   },
-  watch: {
-    // personTrust() {
-    //   this.getPersonTrusts();
-    // },
-  },
+  watch: {},
 };
 </script>
 <style lang="scss" scoped>
