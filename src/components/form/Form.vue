@@ -1,67 +1,72 @@
 <template>
-  <div class="justify-content-center">
-    <div class="container-profil">
-      <label class="container-image" for="image">
-        <b-img :src="imageProfil" :alt="imageProfil" for="image"></b-img>
-        <span>Cliquer sur l'image afin de sélectionner une image</span>
-      </label>
-      <label @click="cloudinaryUploadImage" class="btn-profil" variant="primary"
-        >Modifier la photo de profil</label
-      >
-    </div>
-    <b-form @submit="onSubmit" @reset="onReset" class="ml-3 mr-3">
-      <b-form-group
-        id="input-group-1"
-        label="Nom:"
-        class="mt-3 text-start"
-        label-for="input-1"
-      >
-        <b-form-input
-          id="input-1"
-          v-model="form.name"
-          placeholder="Entre ton nom"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group
-        id="input-group-2"
-        label="Numéro :"
-        class="mt-3 text-start"
-        label-for="input-2"
-      >
-        <b-form-input
-          id="input-2"
-          v-model="form.phoneNumber"
-          placeholder="Entre ton numéro"
-          type="tel"
-          required
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group class="mt-3">
-        <b-form-file
-          v-model="imageInput"
-          type="file"
-          accept="image/*"
-          id="image"
-          plain
-          class="image-input"
-        ></b-form-file>
-      </b-form-group>
-      <div class="d-flex justify-content-end">
-        <b-button type="submit" class="btn-primary" variant="outline-light">{{
-          labelButtonSubmit
-        }}</b-button>
-        <b-button
-          type="reset"
-          class="btn-secondary btn-reset"
-          variant="outline-light"
-        >
-          Annuler</b-button
+  <b-container>
+    <b-row class="px-4 py-4">
+      <div class="container-profil">
+        <label class="container-image" for="image">
+          <b-img :src="imageProfil" :alt="imageProfil" for="image"></b-img>
+          <span>Cliquer sur l'image afin de sélectionner une image</span>
+        </label>
+        <label
+          @click="cloudinaryUploadImage"
+          class="btn-profil"
+          variant="primary"
+          >Modifier la photo de profil</label
         >
       </div>
-    </b-form>
-  </div>
+      <b-form @submit="onSubmit" @reset="onReset">
+        <b-form-group
+          id="input-group-1"
+          label="Nom:"
+          class="mt-3 text-start"
+          label-for="input-1"
+        >
+          <b-form-input
+            id="input-1"
+            v-model="form.name"
+            placeholder="Entre ton nom"
+            required
+          ></b-form-input>
+        </b-form-group>
+
+        <b-form-group
+          id="input-group-2"
+          label="Numéro :"
+          class="mt-3 text-start"
+          label-for="input-2"
+        >
+          <b-form-input
+            id="input-2"
+            v-model="form.phoneNumber"
+            placeholder="Entre ton numéro"
+            type="tel"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group class="mt-3">
+          <b-form-file
+            v-model="imageInput"
+            type="file"
+            accept="image/*"
+            id="image"
+            plain
+            class="image-input"
+          ></b-form-file>
+        </b-form-group>
+        <div class="d-flex justify-content-end">
+          <b-button type="submit" class="btn-primary" variant="outline-light">{{
+            labelButtonSubmit
+          }}</b-button>
+          <b-button
+            type="reset"
+            class="btn-secondary btn-reset"
+            variant="outline-light"
+          >
+            Annuler</b-button
+          >
+        </div>
+      </b-form>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
@@ -82,7 +87,6 @@ export default {
       },
     },
   },
-  components: {},
   data() {
     return {
       personUpdated: this.personUpdate,
@@ -101,18 +105,18 @@ export default {
     }),
   },
   methods: {
-    ...mapActions(["createdPersonTrust", "updatedPersonTrust"]),
+    ...mapActions(["", ""]),
     async onSubmit(event) {
       event.preventDefault();
       this.form.imageProfil = this.imageProfil;
       // alert(JSON.stringify(this.form));
       if (this.labelButtonSubmit == "Enregistrer") {
-        await this.createdPersonTrust(this.form);
+        await this.$emit("createdPersonTrust", this.form);
       } else {
         this.form.id = this.personUpdate.id;
-        await this.updatedPersonTrust(this.form);
+
+        await this.$emit("updatedPersonTrust", this.form);
       }
-      console.log(this.ispersonTrust);
     },
     async cloudinaryUploadImage() {
       console.log("Image profil", this.imageInput);

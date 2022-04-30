@@ -1,8 +1,8 @@
 <template>
-  <b-container class="justify-content-center container_person_trust">
-    <b-row lg="12" class="justify-content-center text-center h-100">
+  <b-container class="justify-content-center container_person">
+    <b-row lg="5" class="justify-content-center text-center h-80">
       <b-col
-        lg="6"
+        lg="5"
         class="justify-content-center text-center person_trust_container"
       >
         <b-tabs content-class="mt-3 " justified>
@@ -11,6 +11,7 @@
               class="container_card_body"
               :personTrust="personTrust"
               @updatePerson="onUpdatePerson"
+              @deletePerson="onDeletePerson"
           /></b-tab>
           <b-tab title="Historique" exact exact-active-class="active-link"
             ><p>I'm the second tab</p></b-tab
@@ -18,17 +19,21 @@
         </b-tabs>
       </b-col>
       <b-col lg="6" class="person_trust_container_create">
+        <Form
+          :personUpdate="personUpdate"
+          :isUpdating="isUpdating"
+          @createdPersonTrust="onCreatedPersonTrust"
+          @updatedPersonTrust="onUpdatedPersonTrust"
+          v-if="isShowForm"
+          class=""
+          @onCancel="cancelPerson"
+        />
+
         <b-row
+          v-else
           class="justify-content-center align-items-center text-center h-100"
         >
-          <Form
-            v-if="isShowForm"
-            class="p-3"
-            :personUpdate="personUpdate"
-            :isUpdating="isUpdating"
-            @onCancel="cancelPerson"
-          />
-          <div class="justify-content-center text-center" v-else>
+          <div class="justify-content-center text-center">
             <div>
               <Icon
                 class="icon_trust_people"
@@ -52,6 +57,9 @@
         </b-row>
       </b-col>
     </b-row>
+    <b-modal ref="modal-option-delete" id="my-modal"
+      >Hello From My Modal!</b-modal
+    >
   </b-container>
 </template>
 <script>
@@ -81,7 +89,12 @@ export default {
     }),
   },
   methods: {
-    ...mapActions(["connectedUser", "getPersonTrust", "updatedPersonTrust"]),
+    ...mapActions([
+      "connectedUser",
+      "getPersonTrust",
+      "createdPersonTrust",
+      "updatedPersonTrust",
+    ]),
     Form() {
       this.isShowForm = true;
     },
@@ -93,6 +106,27 @@ export default {
       // when the modal has hidden
       this.$refs["my-modal"].toggle("#toggle-btn");
     },
+    onCreatedPersonTrust(form) {
+      this.createdPersonTrust(form);
+      this.$bvToast.toast(`Toast with action link`, {
+        href: "#foo",
+        title: "Example",
+      });
+      this.getPersonTrusts();
+    },
+    onUpdatedPersonTrust(form) {
+      console.log("updatedPersonTrust ->", form);
+      this.updatedPersonTrust(form);
+
+      this.$bvToast.toast(`Toast with action link`, {
+        text: "#foo",
+        title: "Example",
+        solid: true,
+        appendToast: true,
+        variant: "success",
+      });
+      this.getPersonTrusts();
+    },
     async getPersonTrusts() {
       await this.getPersonTrust();
     },
@@ -100,13 +134,14 @@ export default {
       this.isShowForm = true;
       this.isUpdating = true;
       this.personUpdate = person;
-
-      console.log("parent", person);
     },
     cancelPerson() {
       this.personUpdate = {};
       this.isShowForm = false;
       this.isUpdating = false;
+    },
+    onDeletePerson() {
+      this.$refs["modal-option-delete"].show();
     },
   },
   mounted() {
@@ -119,17 +154,19 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/scss/main.scss";
-.container_person_trust {
+.container_person {
   margin-top: 13vh;
-  height: 87vh;
+  height: 80vh;
+}
+.container_person_trust {
   border: 1px solid $colorSecondary;
 }
 .person_trust_container_create {
-  height: 87vh;
   border: 1px solid $colorSecondary;
 }
 .container_card_body {
-  height: 600px;
+  height: 70vh;
+
   overflow-y: scroll !important;
 }
 .icon_trust_people {

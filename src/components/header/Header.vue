@@ -33,6 +33,7 @@
             <b-button class="btn-secondary" pill variant="outline-light">
               <Icon icon="bxs:phone-call"
             /></b-button>
+
             <b-dropdown
               id="dropdown-offset"
               offset="25"
