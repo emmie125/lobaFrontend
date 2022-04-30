@@ -1,8 +1,9 @@
 <template>
   <b-container class="justify-content-center container_person">
-    <b-row lg="5" class="justify-content-center text-center h-80">
+    <b-row lg="5" md="8" class="justify-content-center text-center h-80">
       <b-col
         lg="5"
+        md="8"
         class="justify-content-center text-center person_trust_container"
       >
         <b-tabs content-class="mt-3 " justified>
@@ -57,8 +58,54 @@
         </b-row>
       </b-col>
     </b-row>
-    <b-modal ref="modal-option-delete" id="my-modal"
-      >Hello From My Modal!</b-modal
+    <b-button
+      class="btn-primary btn_person_trust_container_create"
+      @click="onOpenModalPersonTrust"
+      size="lg"
+      variant="outline-light"
+      >+</b-button
+    >
+    <b-modal
+      ref="modal-option-person-trust"
+      id=" modal"
+      centered
+      hide-header
+      hide-footer
+    >
+      <Form
+        :personUpdate="personUpdate"
+        :isUpdating="isUpdating"
+        @createdPersonTrust="onCreatedPersonTrust"
+        @updatedPersonTrust="onUpdatedPersonTrust"
+        v-if="isShowForm"
+        class=""
+        @onCancel="cancelPerson"
+      />
+    </b-modal>
+
+    <b-modal
+      ref="modal-option-delete"
+      id=" modal"
+      centered
+      hide-header
+      hide-footer
+      >Voulez-vous vraiment supprimer cette personne de confiance
+      <div class="d-flex justify-content-end m-4">
+        <b-button
+          class="btn-primary"
+          @click="onDeletedPersonTrust"
+          variant="outline-light"
+          >Supprimer</b-button
+        >
+        <b-button
+          style="margin-left: 15px"
+          class="btn-secondary"
+          @click="hideModal"
+          variant="outline-light"
+        >
+          Annuler</b-button
+        >
+      </div></b-modal
     >
   </b-container>
 </template>
@@ -79,6 +126,7 @@ export default {
       isShowForm: false,
       personUpdate: {},
       isUpdating: false,
+      idPersonTrust: 0,
     };
   },
   computed: {
@@ -94,17 +142,18 @@ export default {
       "getPersonTrust",
       "createdPersonTrust",
       "updatedPersonTrust",
+      "deletedPersonTrust",
     ]),
     Form() {
       this.isShowForm = true;
     },
     hideModal() {
-      this.$refs["my-modal"].hide();
+      this.$refs["modal-option-delete"].hide();
     },
-    toggleModal() {
-      // We pass the ID of the button that we want to return focus to
-      // when the modal has hidden
-      this.$refs["my-modal"].toggle("#toggle-btn");
+    onDeletedPersonTrust() {
+      this.deletedPersonTrust(this.idPersonTrust);
+      this.getPersonTrusts();
+      this.$refs["modal-option-delete"].hide();
     },
     onCreatedPersonTrust(form) {
       this.createdPersonTrust(form);
@@ -140,7 +189,8 @@ export default {
       this.isShowForm = false;
       this.isUpdating = false;
     },
-    onDeletePerson() {
+    onDeletePerson(id) {
+      this.idPersonTrust = id;
       this.$refs["modal-option-delete"].show();
     },
   },
@@ -162,6 +212,7 @@ export default {
   border: 1px solid $colorSecondary;
 }
 .person_trust_container_create {
+  display: block;
   border: 1px solid $colorSecondary;
 }
 .container_card_body {
@@ -197,5 +248,21 @@ a {
   color: $colorPrimary !important;
   background-color: white !important;
   border: transparent !important;
+}
+.btn_person_trust_container_create {
+  display: none;
+}
+@media (max-width: $max-width) {
+  .person_trust_container_create {
+    display: none;
+  }
+  .btn_person_trust_container_create {
+    display: block;
+    position: fixed;
+    top: 80%;
+    left: 80%;
+    font-size: 24px;
+    font-weight: 800;
+  }
 }
 </style>

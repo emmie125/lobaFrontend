@@ -6,6 +6,8 @@
     </div>
     <b-row
       lg="12"
+      md="8"
+      sm="5"
       v-else
       style=""
       class="container_person justify-content-between"
@@ -13,7 +15,7 @@
       :key="index"
       fluid
     >
-      <b-col lg="5" style="" class="justify-content-center px-0">
+      <b-col lg="5" md="3" sm="2" style="" class="justify-content-center px-0">
         <b-img
           :src="person.imageProfil"
           class="image"
@@ -21,13 +23,13 @@
           :alt="person.name"
         ></b-img>
       </b-col>
-      <b-col lg="4" class="container_person_identity">
+      <b-col lg="4" md="3" sm="2" class="container_person_identity">
         <div class="container_person_identity_information">
           <h2>{{ person.name }}</h2>
           <p>{{ person.phoneNumber }}</p>
         </div>
       </b-col>
-      <b-col lg="3" class="container_person_identity">
+      <b-col lg="3" md="2" sm="1" class="container_person_identity">
         <b-dropdown
           right
           toggle-class="text-decoration-none outline-none border-white"

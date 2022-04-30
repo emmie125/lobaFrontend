@@ -60,6 +60,26 @@ export default {
           console.log(error);
         });
     },
+    async deletedPersonTrust(context, payload) {
+      console.log("payload ->", payload);
+      const urlApi = `http://127.0.0.1:8000/api/person_trusts/${payload}`;
+      const options = {
+        url: urlApi,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        },
+        method: "DELETE",
+      };
+      await axios(options)
+        .then((response) => {
+          context.commit("CREATED_PERSON_TRUST", response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     getPersonTrust({ commit }) {
       const urlApi = `http://127.0.0.1:8000/api/person_trusts/`;
       const options = {
