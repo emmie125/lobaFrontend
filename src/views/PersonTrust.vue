@@ -77,7 +77,6 @@
         :isUpdating="isUpdating"
         @createdPersonTrust="onCreatedPersonTrust"
         @updatedPersonTrust="onUpdatedPersonTrust"
-        v-if="isShowForm"
         class=""
         @onCancel="cancelPerson"
       />
@@ -146,6 +145,9 @@ export default {
     ]),
     Form() {
       this.isShowForm = true;
+    },
+    onOpenModalPersonTrust() {
+      this.$refs["modal-option-person-trust"].show();
     },
     hideModal() {
       this.$refs["modal-option-delete"].hide();
