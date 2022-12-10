@@ -24,7 +24,6 @@ export default {
 @import "@/scss/main.scss";
 
 .app {
-  overflow: hidden;
   margin: 0 0 !important;
 }
 </style>

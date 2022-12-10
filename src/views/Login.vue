@@ -1,68 +1,68 @@
 <template>
-  <b-container
-    style="background-color: #d81b60"
-    class="justify-content-center"
-    fluid
-  >
-    <b-row class="p-5" lg="12" style="background-color: #d81b60">
-      <h1 class="text-center ml">LOBA</h1>
-
-      <b-col class="col-md-6 offset-md-3 container-form mt-5">
-        <h2 class="text-center ml">Connectez-vous à votre compte</h2>
-        <p style="color: #d81b60" class="m-4">{{ error }}</p>
-        <p>
-          <b-form @submit="onSubmit" v-if="show">
-            <b-form-group
-              class="m-4"
-              id="input-group-1"
-              label="Adresse mail:"
-              label-for="input-1"
-            >
-              <b-form-input
-                id="input-1"
-                v-model="form.email"
-                type="email"
-                placeholder="Entre ton email"
-                required
-              ></b-form-input>
-            </b-form-group>
-
-            <b-form-group
-              id="input-group-2"
-              class="m-4"
-              label="Password:"
-              label-for="input-2"
-            >
-              <b-form-input
-                id="input-2"
-                type="password"
-                v-model="form.password"
-                placeholder="Entre ton password"
-                required
-              ></b-form-input>
-            </b-form-group>
-            <b-row class="text-center fluid m-3 pt-2 pb-2">
-              <b-button
-                type="submit"
-                class="pl-3 pr-3 pt-2 pb-2"
-                variant="primary"
-                >connexion</b-button
+  <b-container class="justify-content-center" fluid>
+    <b-row class="" lg="12">
+      <b-col class="justify-content-center align-content-center">
+        <b-img src="https://picsum.photos/300/150/?image=41" fluid alt="Fluid image"></b-img>
+      </b-col>
+      <b-col class="col-lg-7 align-content-center p-5">
+        <h1 class="text-center ml">LOBA</h1>
+        <b-col class="lg-4 md-6 container-form mt-5">
+          <h2 class="text-center ml">Connectez-vous à votre compte</h2>
+          <p style="color: #d81b60" class="m-4">{{ error }}</p>
+          <b-col class="mx-6">
+            <b-form @submit="onSubmit" v-if="show">
+              <b-form-group
+                class="m-4"
+                id="input-group-1"
+                label="Adresse mail:"
+                label-for="input-1"
               >
-            </b-row>
-            <b-row class="text-center fluid m-3 pt-2 pb-2">
-              <b-button
-                :to="{ name: 'signup' }"
-                class="pl-3 pr-3 pt-2 pb-2 btn-secondary"
-                variant="primary"
-                >Créer un compte</b-button
+                <b-form-input
+                  id="input-1"
+                  v-model="form.email"
+                  type="email"
+                  placeholder="Entre ton email"
+                  required
+                ></b-form-input>
+              </b-form-group>
+
+              <b-form-group
+                id="input-group-2"
+                class="m-4"
+                label="Mot de passe:"
+                label-for="input-2"
               >
+                <b-form-input
+                  id="input-2"
+                  type="password"
+                  v-model="form.password"
+                  placeholder="Entre ton mot de passe"
+                  required
+                ></b-form-input>
+              </b-form-group>
+              <b-row class="text-center fluid m-3 pt-2 pb-2">
+                <b-button
+                  type="submit"
+                  class="pl-3 pr-3 pt-2 pb-2"
+                  variant="primary"
+                  >connexion</b-button
+                >
+              </b-row>
+              <b-row class="text-center fluid m-3 pt-2 pb-2">
+                <b-button
+                  :to="{ name: 'signup' }"
+                  class="pl-3 pr-3 pt-2 pb-2 btn-secondary"
+                  variant="primary"
+                  >Créer un compte</b-button
+                >
+              </b-row>
+            </b-form>
+            <b-row class="text-end m-3">
+              <b-link> mot de passe oublié</b-link>
             </b-row>
-          </b-form>
-          <b-row class="text-end m-3">
-            <b-link> mot de passe oublié</b-link>
-          </b-row>
-        </p></b-col
-      >
+          </b-col>
+        </b-col>
+      </b-col>
     </b-row>
   </b-container>
 </template>
@@ -118,6 +118,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/scss/main.scss";
+.container-fluid {
+  height: 100vh;
+}
 .container-form {
   border: 1px solid #d81b60;
   padding: 30px;
@@ -125,7 +128,7 @@ export default {
   background-color: white;
 }
 h1 {
-  color: white;
+  color: #d81b60;
   font-weight: normal;
 }
 h2 {

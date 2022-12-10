@@ -1,5 +1,5 @@
 <template>
-  <b-container style="background-color: #d81b60" fluid>
+  <b-container fluid>
     <b-row class="p-5">
       <b-row class="text-center" lg="12">
         <b-col class="text-center" lg="6" md="4">
@@ -164,6 +164,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/scss/main.scss";
+.container-fluid {
+  height: 100vh;
+}
 .container-form {
   border: 1px solid #d81b60;
   padding: 30px;
@@ -171,7 +174,7 @@ export default {
   background-color: white;
 }
 h1 {
-  color: white;
+  color:#d81b60;
   font-weight: normal;
 }
 h3 {
