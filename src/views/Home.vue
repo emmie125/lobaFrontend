@@ -25,12 +25,9 @@ export default {
     }),
   },
   methods: {
-    ...mapActions(["connectedUser"]),
+    ...mapActions([""]),
   },
-  async mounted() {
-    await this.connectedUser();
-    console.log("user", this.user);
-    console.log("image_profil", this.imageProfil);
+   mounted() {
   },
   created() {},
 };

@@ -1,4 +1,6 @@
 import axios from "axios";
+import uri from "../../utils/config";
+
 
 export default {
   state: {
@@ -20,13 +22,13 @@ export default {
       console.log("isAuthorized", state.isAuthorized);
     },
     userauthorized(state, payload) {
-      state.user = payload.data;
+      state.user = payload;
       console.log("test", state.user);
     },
   },
   actions: {
     async loginUser(context, payload) {
-      const urlApi = "http://127.0.0.1:8000/api/auth/login";
+      const urlApi = `${uri}auth/login`;
       const options = {
         url: urlApi,
         method: "POST",
@@ -40,12 +42,13 @@ export default {
         .then((data) => {
           sessionStorage.setItem("access_token", data.data.access_token);
           context.commit("authorization");
+          context.commit("userauthorized", response.user);
           console.log(data.data.name);
         })
         .catch(() => {});
     },
     async signupUser(context, payload) {
-      const urlApi = "http://127.0.0.1:8000/api/auth/signup";
+      const urlApi = `${uri}auth/register`;
       const options = {
         url: urlApi,
         method: "POST",
@@ -63,25 +66,6 @@ export default {
         .catch((error) => {
           console.log(payload.response.data.errors);
           context.commit("ERROR_SIGNUP", error);
-        });
-    },
-    async connectedUser(context) {
-      const url = "http://127.0.0.1:8000/api/user";
-      const options = {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
-        },
-      };
-      await axios
-        .get(url, options)
-        .then((response) => {
-          context.commit("userauthorized", response);
-          console.log("userauthorized", response.data);
-        })
-        .catch((error) => {
-          console.log(error.response);
         });
     },
   },

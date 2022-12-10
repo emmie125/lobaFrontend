@@ -137,7 +137,6 @@ export default {
   },
   methods: {
     ...mapActions([
-      "connectedUser",
       "getPersonTrust",
       "createdPersonTrust",
       "updatedPersonTrust",
