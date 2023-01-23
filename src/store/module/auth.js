@@ -1,7 +1,6 @@
 import axios from "axios";
 import uri from "../../utils/config";
 
-
 export default {
   state: {
     error: "",
@@ -42,7 +41,7 @@ export default {
         .then((data) => {
           sessionStorage.setItem("access_token", data.data.access_token);
           context.commit("authorization");
-          context.commit("userauthorized", response.user);
+          context.commit("userauthorized", data.user);
           console.log(data.data.name);
         })
         .catch(() => {});

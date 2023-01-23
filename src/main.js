@@ -7,6 +7,7 @@ import "@/scss/main.scss";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import './validation';
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import "bootstrap/dist/css/bootstrap.css";

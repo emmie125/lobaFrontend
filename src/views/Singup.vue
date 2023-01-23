@@ -1,22 +1,31 @@
 <template>
   <b-container fluid>
-    <b-row class="p-5">
-      <b-row class="text-center" lg="12">
-        <b-col class="text-center" lg="6" md="4">
-          <h1>LOBA</h1>
-        </b-col>
-        <b-col lg="5" class="text-end" md="7" sm="12">
-          <span> Vous avez déjà un compte? </span>
-          <b-button
-            :to="{ name: 'login' }"
-            class="pl-5 pr-5 pt-2 pb-2 btn-secondary"
-            variant="primary"
-            >Connexion</b-button
-          >
-        </b-col>
+    <b-row class="h-100">
+      <b-col class="container-login">
+        <b-row>
+          <b-col>
+            <b-img
+              rounded="circle"
+              center
+              width="125"
+              heigth="125"
+              src="violence-victime.jpg"
+              alt="Center image"
+            ></b-img>
+          </b-col>
+          <b-col lg="12">
+            <h1 class="text-center text-white">LOBA</h1>
+          </b-col>
+        </b-row>
+        <b-row class="h-100 align-items-center">
+          <h1 class="text-center text-white">Application d'aide aux victimes de violences</h1>
+          <div class="mx-auto">
+          </div>
+        </b-row>
+      </b-col>
+      <b-col class="col-lg-6 align-content-center p-5 container-form mt-5">
+        <b-row class="text-center" lg="12">
       </b-row>
-
-      <b-col class="col-md-6 offset-md-3 container-form mt-5">
         <h2 class="text-center">
           Inscrivez-vous gratuitement et découvrez Loba dès aujourd'hui
         </h2>
@@ -33,6 +42,7 @@
               v-model="form.name"
               placeholder="Nom"
               required
+              class="py-2"
             ></b-form-input>
           </b-form-group>
           <b-form-group
@@ -48,6 +58,22 @@
               type="email"
               placeholder="Adresse e-mail"
               required
+              class="py-2"
+            ></b-form-input>
+          </b-form-group>
+          <b-form-group
+            class="m-4"
+            id="input-group-2"
+            label="Numero de telephone"
+            label-for="input-2"
+            description=""
+          >
+            <b-form-input
+              id="input-2"
+              v-model="form.phone_number"
+              placeholder="Numero de telephone"
+              required
+              class="py-2"
             ></b-form-input>
           </b-form-group>
           <b-form-group
@@ -62,6 +88,7 @@
               v-model="form.password"
               placeholder="Mot de passe"
               required
+              class="py-2"
             ></b-form-input>
           </b-form-group>
           <b-form-group
@@ -76,16 +103,23 @@
               v-model="form.password_confirmation"
               placeholder="Mot de passe"
               required
+              class="py-2"
             ></b-form-input>
           </b-form-group>
           <b-row class="text-center fluid m-3 pt-2 pb-2">
             <b-button
               type="submit"
-              class="pl-4 pr-4 pt-2 pb-2"
+              class="px-4 py-2"
               variant="primary"
               >créer un compte</b-button
             >
           </b-row>
+          <b-row class="text-center fluid m-3 pt-2 pb-2">
+            <b-button
+            :to="{ name: 'login' }"
+            class="px-4 py-2  btn-secondary"
+            >Connexion</b-button>
+              </b-row>
         </b-form>
       </b-col>
     </b-row>
@@ -126,6 +160,7 @@ export default {
         password: "",
         password_confirmation: "",
         name: "",
+        phone_number: null,
       },
       show: true,
     };
@@ -164,17 +199,19 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/scss/main.scss";
+.container-login {
+  background-color: $colorPrimary;
+}
 .container-fluid {
   height: 100vh;
 }
 .container-form {
-  border: 1px solid #d81b60;
   padding: 30px;
   border-radius: 10px;
   background-color: white;
 }
 h1 {
-  color:#d81b60;
+  color: $colorPrimary;
   font-weight: normal;
 }
 h3 {
@@ -185,27 +222,16 @@ h2 {
   font-weight: 100;
 }
 button {
-  background-color: #d81b60;
+  background-color: $colorPrimary;
   color: white;
   border-color: white;
   &:hover {
-    background-color: #d81b60;
+    background-color: $colorPrimary;
     color: white;
     border-color: white;
   }
 }
 span {
   color: white;
-}
-.btn-secondary {
-  background-color: #d81b60;
-  color: white;
-  border-color: white;
-  margin-left: 10px;
-  &:hover {
-    background-color: #d81b60;
-    color: white;
-    border-color: white;
-  }
 }
 </style>

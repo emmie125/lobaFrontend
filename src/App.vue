@@ -25,5 +25,6 @@ export default {
 
 .app {
   margin: 0 0 !important;
+  overflow-y: hidden;
 }
 </style>

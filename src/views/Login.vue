@@ -1,16 +1,34 @@
 <template>
-  <b-container class="justify-content-center" fluid>
-    <b-row class="" lg="12">
-      <b-col class="justify-content-center align-content-center">
-        <b-img src="https://picsum.photos/300/150/?image=41" fluid alt="Fluid image"></b-img>
+  <b-container class="" fluid>
+    <b-row class="h-100">
+      <b-col class="container-login">
+        <b-row>
+          <b-col>
+            <b-img
+              rounded="circle"
+              center
+              width="125"
+              heigth="125"
+              src="violence-victime.jpg"
+              alt="Center image"
+            ></b-img>
+          </b-col>
+          <b-col lg="12">
+            <h1 class="text-center text-white">LOBA</h1>
+          </b-col>
+        </b-row>
+        <b-row class="h-100 align-items-center">
+          <h1 class="text-center text-white">Application d'aide aux victimes de violences</h1>
+          <div class="mx-auto">
+          </div>
+        </b-row>
       </b-col>
-      <b-col class="col-lg-7 align-content-center p-5">
-        <h1 class="text-center ml">LOBA</h1>
-        <b-col class="lg-4 md-6 container-form mt-5">
+      <b-col class="col-lg-6 align-content-center p-5">
+        <b-row class="align-items-center mt-5">
           <h2 class="text-center ml">Connectez-vous à votre compte</h2>
-          <p style="color: #d81b60" class="m-4">{{ error }}</p>
-          <b-col class="mx-6">
-            <b-form @submit="onSubmit" v-if="show">
+          <p class="m-4 error-text">{{ error }}</p>
+          <b-col>
+            <b-form @submit="onSubmit" v-if="show" class="mx-6">
               <b-form-group
                 class="m-4"
                 id="input-group-1"
@@ -19,6 +37,7 @@
               >
                 <b-form-input
                   id="input-1"
+                  class="py-3"
                   v-model="form.email"
                   type="email"
                   placeholder="Entre ton email"
@@ -38,12 +57,13 @@
                   v-model="form.password"
                   placeholder="Entre ton mot de passe"
                   required
+                  class="py-3"
                 ></b-form-input>
               </b-form-group>
               <b-row class="text-center fluid m-3 pt-2 pb-2">
                 <b-button
                   type="submit"
-                  class="pl-3 pr-3 pt-2 pb-2"
+                  class="pl-3 pr-3 py-2"
                   variant="primary"
                   >connexion</b-button
                 >
@@ -61,7 +81,7 @@
               <b-link> mot de passe oublié</b-link>
             </b-row>
           </b-col>
-        </b-col>
+        </b-row>
       </b-col>
     </b-row>
   </b-container>
@@ -72,6 +92,7 @@ import { mapActions, mapState } from "vuex";
 
 export default {
   name: "Login",
+  components: {},
   data() {
     return {
       form: {
@@ -118,17 +139,22 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/scss/main.scss";
+.container-login {
+  background-color: $colorPrimary;
+}
 .container-fluid {
   height: 100vh;
 }
 .container-form {
-  border: 1px solid #d81b60;
   padding: 30px;
   border-radius: 10px;
   background-color: white;
 }
+.error-text {
+  color: $colorPrimary;
+}
 h1 {
-  color: #d81b60;
+  color: $colorPrimary;
   font-weight: normal;
 }
 h2 {
@@ -136,13 +162,13 @@ h2 {
   font-weight: 100;
 }
 button {
-  background-color: #d81b60;
+  background-color: $colorPrimary;
   color: white;
-  border-color: #d81b60;
+  border-color: $colorPrimary;
   &:hover {
-    background-color: #d81b60;
+    background-color: $colorPrimary;
     color: white;
-    border-color: #d81b60;
+    border-color: $colorPrimary;
   }
 }
 a {
@@ -153,13 +179,13 @@ a {
 }
 .btn-secondary {
   background-color: white;
-  color: #d81b60;
-  border-color: #d81b60;
+  color: $colorPrimary;
+  border-color: $colorPrimary;
 
   &:hover {
     background-color: white;
-    color: #d81b60;
-    border-color: #d81b60;
+    color: $colorPrimary;
+    border-color: $colorPrimary;
   }
 }
 </style>

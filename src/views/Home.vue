@@ -27,8 +27,7 @@ export default {
   methods: {
     ...mapActions([""]),
   },
-   mounted() {
-  },
+  mounted() {},
   created() {},
 };
 </script>
