@@ -1,7 +1,7 @@
 <template>
-  <div id="app" class="app" fluid>
-    <router-view />
-  </div>
+  <b-container id="app" class="app" fluid>
+    <router-view></router-view>
+  </b-container>
 </template>
 
 <script>
@@ -17,7 +17,6 @@ export default {
   mounted() {
     console.log();
   },
-  created() {},
 };
 </script>
 <style lang="scss" scoped>
@@ -25,6 +24,7 @@ export default {
 
 .app {
   margin: 0 0 !important;
+  padding: 0 0 !important;
   overflow-y: hidden;
 }
 </style>

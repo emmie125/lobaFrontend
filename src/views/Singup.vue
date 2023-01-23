@@ -9,7 +9,7 @@
               center
               width="125"
               heigth="125"
-              src="violence-victime.jpg"
+              :src="require('@/assets/violence-victime.jpg')"
               alt="Center image"
             ></b-img>
           </b-col>
@@ -18,14 +18,14 @@
           </b-col>
         </b-row>
         <b-row class="h-100 align-items-center">
-          <h1 class="text-center text-white">Application d'aide aux victimes de violences</h1>
-          <div class="mx-auto">
-          </div>
+          <h1 class="text-center text-white">
+            Application d'aide aux victimes de violences
+          </h1>
+          <div class="mx-auto"></div>
         </b-row>
       </b-col>
       <b-col class="col-lg-6 align-content-center p-5 container-form mt-5">
-        <b-row class="text-center" lg="12">
-      </b-row>
+        <b-row class="text-center" lg="12"> </b-row>
         <h2 class="text-center">
           Inscrivez-vous gratuitement et découvrez Loba dès aujourd'hui
         </h2>
@@ -107,19 +107,15 @@
             ></b-form-input>
           </b-form-group>
           <b-row class="text-center fluid m-3 pt-2 pb-2">
-            <b-button
-              type="submit"
-              class="px-4 py-2"
-              variant="primary"
+            <b-button type="submit" class="px-4 py-2" variant="primary"
               >créer un compte</b-button
             >
           </b-row>
           <b-row class="text-center fluid m-3 pt-2 pb-2">
-            <b-button
-            :to="{ name: 'login' }"
-            class="px-4 py-2  btn-secondary"
-            >Connexion</b-button>
-              </b-row>
+            <b-button :to="{ name: 'login' }" class="px-4 py-2 btn-secondary"
+              >Connexion</b-button
+            >
+          </b-row>
         </b-form>
       </b-col>
     </b-row>
