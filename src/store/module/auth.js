@@ -6,7 +6,7 @@ export default {
     error: "",
     user: {},
     isAuthenticated: false,
-    isAuthorized: false,
+    isNotAuthorized: null,
     isLoadingAuthorized: false,
     image_profil: "",
   },
@@ -17,13 +17,12 @@ export default {
     SET_AUTHENTIFICATION(state) {
       state.isAuthenticated = true;
     },
-    SET_AUTHORIZATION(state, payload) {
-      state.isAuthorized = payload;
-      console.log("isAuthorized", state.isAuthorized);
+    SET_UNAUTHORIZATION(state, payload) {
+      state.isNotAuthorized = payload;
+      console.log("SET_UNAUTHORIZATION", state.isNotAuthorized);
     },
     SET_IS_LOADING_AUTHORIZED(state, payload) {
       state.isLoadingAuthorized = payload;
-      console.log("isAuthorized", state.isAuthorized);
     },
     SET_USER_AUTHORIZED(state, payload) {
       state.user = payload;
@@ -39,30 +38,25 @@ export default {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
+          "X-Requested-With": "XMLHttpRequest",
         },
         data: payload,
       };
       commit("SET_IS_LOADING_AUTHORIZED", true);
       localStorage.removeItem("tokenKey");
+      commit("SET_UNAUTHORIZATION", null);
       return new Promise((resolve, reject) => {
         axios(options)
-          .then(({ data }) => {
-            // commit("SET_ISLOADING_AUTHORIZED_USER", false);
-            // commit("SET_ERROR", false);
-            // commit("SET_USER_CONNECTED", data);
-
-            // localStorage.setItem("tokenKey", data.authorization.token);
+          .then((data) => {
+            console.log("data", resolve(data));
+            commit("SET_UNAUTHORIZATION", false);
             resolve(data);
-            console.log(data);
             commit("SET_IS_LOADING_AUTHORIZED", false);
-
           })
           .catch((response) => {
             reject(response);
-            // commit("SET_ERROR", true);
-            // commit("SET_ISLOADING_AUTHORIZED_USER", false);
             commit("SET_IS_LOADING_AUTHORIZED", false);
-
+            commit("SET_UNAUTHORIZATION", true);
           });
       });
     },

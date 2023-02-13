@@ -1,7 +1,7 @@
 <template>
-  <b-container>
+  <b-container fluid>
     <b-row>
-      <b-col>
+      <b-col class="d-flex justify-content-center">
         <rating
           class="fs-3"
           iconRatingEmpty="ant-design:heart"
@@ -27,7 +27,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .container {
-  margin-top: 15%;
+ 
 }
 .icon-rating {
 }

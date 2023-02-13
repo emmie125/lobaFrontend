@@ -23,6 +23,12 @@ Vue.use(IconsPlugin);
 
 Vue.config.productionTip = false;
 
+router.beforeEach((to, from, next) => {
+  if (to.name !== "login" && !localStorage.getItem("tokenKey"))
+    next({ name: "login" });
+  else next();
+});
+
 new Vue({
   router,
   store,

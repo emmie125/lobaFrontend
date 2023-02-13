@@ -38,7 +38,7 @@ export default {
   methods: {
     rating() {
       this.stateRating = !this.stateRating;
-      this.$emit("rating", this.stateRating);
+      // this.$emit("rating", this.stateRating);
     },
   },
 };

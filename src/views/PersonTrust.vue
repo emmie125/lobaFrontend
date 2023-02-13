@@ -1,8 +1,8 @@
 <template>
-  <b-container class="justify-content-center container_person">
-    <b-row lg="5" md="8" class="justify-content-center text-center h-80">
+  <b-container class="" fluid>
+    <b-row class="">
       <b-col
-        lg="5"
+        lg="6"
         md="8"
         class="justify-content-center text-center person_trust_container"
       >
@@ -205,13 +205,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/scss/main.scss";
-.container_person {
-  margin-top: 13vh;
-  height: 80vh;
-}
-.container_person_trust {
-  border: 1px solid $colorSecondary;
-}
+
+
 .person_trust_container_create {
   display: block;
   border: 1px solid $colorSecondary;

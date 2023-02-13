@@ -22,17 +22,11 @@ const routes = [
   },
   {
     path: "/",
-    beforeEnter: (to, from, next) => {
-      if (!sessionStorage.getItem("access_token")) next({ name: "login" });
-      else next();
-    },
-    name: "home",
-    redirect: "/actuality",
     component: Home,
     children: [
       {
-        path: "/actuality",
-        name: "actuality",
+        path: "/",
+        name: "home",
         component: Actuality,
       },
       {

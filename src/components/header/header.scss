@@ -1,7 +1,7 @@
 .btn-dropdown-container {
   color: $colorPrimary;
   border-radius: 5px;
-  // margin-left: 50px;
+  width: 100%;
   &:active {
     outline-style: none !important;
     border: none !important;
@@ -12,29 +12,36 @@
   }
 }
 .navbar {
-  width: 100%;
-  background-color: $colorPrimary;
+  height: 100%;
+  background-color:white;
+  width: max-content;
+  display: inline;
+  @media ( max-width:1024px) {
+    width: min-content;
+  }
+
 }
 .logo {
-  width: 50%;
-  text-align: start;
+
 }
 .navbar_container {
-  width: 80%;
-  justify-content: space-between;
 }
 .navbar_container_menu {
-  width: 50%;
+  width: 100%;
 }
 .navbar_container_menu_link {
   width: 100%;
-  justify-content: flex-end;
-  align-self: end;
+  display: flex;
+
   .nav {
-    justify-content: space-between;
     width: 100%;
-  }
-  .nav-item {
+    .nav-item{
+      width: 100%;
+
+    }
+    .btn-secondary{
+      width: 100%;
+    }
   }
 }
 .iconHeader {

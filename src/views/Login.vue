@@ -27,7 +27,9 @@
       <b-col class="col-lg-6 align-content-center p-5">
         <b-row class="align-items-center mt-5">
           <h2 class="text-center ml">Connectez-vous à votre compte</h2>
-          <p class="m-4 error-text">{{ error }}</p>
+          <p class="m-4 error-text" v-show="isNotAuthorized">
+            mot de passe ou adresse e-mail incorrecte
+          </p>
           <b-col>
             <ValidationObserver v-slot="{ handleSubmit }" ref="form" tag="form">
               <b-form @submit.prevent="handleSubmit(onSubmit)" class="mx-6">
@@ -83,7 +85,12 @@
                     type="submit"
                     class="pl-3 pr-3 py-2"
                     variant="primary"
-                    >connexion
+                  >
+                    <span v-if="isLoadingAuthorized">
+                      <b-spinner small></b-spinner>
+                      Connection...
+                    </span>
+                    <span v-else>connexion</span>
                   </b-button>
                 </b-row>
                 <b-row class="text-center fluid m-3 pt-2 pb-2">
@@ -91,8 +98,9 @@
                     :to="{ name: 'signup' }"
                     class="pl-3 pr-3 pt-2 pb-2 btn-secondary"
                     variant="primary"
-                    >Créer un compte</b-button
                   >
+                    Créer un compte
+                  </b-button>
                 </b-row>
               </b-form>
             </ValidationObserver>
@@ -119,26 +127,26 @@ export default {
         email: "",
         password: "",
       },
-      error: "",
     };
   },
   computed: {
     ...mapState({
-      isAuthorized: (state) => state.auth.isAuthorized,
+      isNotAuthorized: (state) => state.auth.isNotAuthorized,
+      isLoadingAuthorized: (state) => state.auth.isLoadingAuthorized,
     }),
   },
   methods: {
     ...mapActions(["loginUser"]),
     onSubmit() {
-      this.loginUser(this.form).then(() => {
-        if (this.isAuthorized) {
-          this.$router.push({ name: "home" });
-        } else {
-          this.error = " mot de passe ou adresse e-mail incorrecte";
-        }
-      });
-
-      console.log("login isAuthorized", this.isAuthorized);
+      this.loginUser(this.form)
+        .then(({ data }) => {
+          console.log("data", data);
+          localStorage.setItem("tokenKey", data.authorization.token);
+          this.$router.push({ name: "home" }).catch(() => ({}));
+        })
+        .catch((data) => {
+          console.log("data", data);
+        });
     },
     onReset() {
       // Reset our form values
