@@ -4,7 +4,7 @@
       <b-col class="mx-0 px-0"
         ><Header :username="user" :src="imageProfil"
       /></b-col>
-      <b-col lg="9" md="10" class="container-route">
+      <b-col lg="9" md="10" class="">
         <router-view />
       </b-col>
     </b-row>

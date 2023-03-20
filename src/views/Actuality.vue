@@ -4,8 +4,6 @@
       <b-col class="d-flex justify-content-center">
         <rating
           class="fs-3"
-          iconRatingEmpty="ant-design:heart"
-          iconRatingFull="ant-design:heart-filled"
         />
       </b-col>
     </b-row>

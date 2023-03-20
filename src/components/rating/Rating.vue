@@ -2,8 +2,8 @@
   <b-row>
     <b-col>
       <b-col v-model="stateRating" @click="rating">
-        <Icon v-if="stateRating" :icon="iconRatingFull" class="text-danger" />
-        <Icon v-else :icon="iconRatingEmpty" class="text-danger" />
+        <Icon v-if="stateRating" icon="ant-design:heart-filled" color="#c40002"/>
+        <Icon v-else icon="ant-design:heart" color="#c40002" />
       </b-col>
     </b-col>
   </b-row>
